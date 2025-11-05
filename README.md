@@ -1,5 +1,5 @@
 # NoteSafe
-Aplicación de notas personales segura (Django).
+Aplicación de notas personales segura
 
 ## Requisitos
 - Python 3.x
