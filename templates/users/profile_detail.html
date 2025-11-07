@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block head_title %}Detalle de Perfil{% endblock %}
+
+{% block content %}
+    <div class="profile-detail-container">
+        <h1>Detalle de Perfil</h1>
+        <hr>
+
+        <h2>Datos de Cuenta y Preferencias</h2>
+        <table class="profile-table">
+            <tr><th>Nombre Completo:</th><td>{{ user_profile.get_full_name }}</td></tr>
+            <tr><th>Email:</th><td>{{ user_profile.email }}</td></tr>
+            <tr><th>Zona Horaria:</th><td>{{ user_profile.timezone }}</td></tr>
+        </table>
+        
+        <hr>
+
+        <table class="stats-table">
+            <tr><th>Total de Notas Creadas:</th><td>{{ stats.total_notes }}</td></tr>
+            <tr>
+                <th>Etiquetas Más Usadas (Top 5):</th>
+                <td>
+                    {% for tag in stats.most_used_tags %}
+                        <span class="tag-stat">{{ tag.name }} ({{ tag.note_count }})</span>{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        Aún no tienes etiquetas.
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+        
+        <hr>
+
+        <div class="profile-actions">
+            <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">Editar perfil</a>
+            <a href="{% url 'account_change_password' %}" class="btn btn-secondary">Cambiar Contraseña</a>
+        </div>
+        
+        <hr>
+        
+        <div class="delete-section">
+            <h3>ELIMINAR LA CUENTA</h3>
+            <p>La eliminación de la cuenta es permanente y borrará todas tus notas asociadas. Esta acción no se puede deshacer.</p>
+            {% if request.user.is_authenticated and request.user.pk %}
+                <a href="{% url 'users:profile_delete' pk=request.user.pk %}" class="btn btn-danger">Eliminar perfil</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

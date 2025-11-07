@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head_title %}Confirmar Eliminación{% endblock %}
+
+{% block content %}
+    <div class="delete-container">
+        <h1>Confirmar Eliminación de Cuenta</h1>
+        <p>Estás a punto de eliminar tu cuenta permanentemente. Esta acción **BORRARÁ** todas tus notas y datos de perfil. **Esta acción no se puede deshacer.**</p>
+
+        <p>¿Estás completamente seguro de que deseas eliminar tu cuenta?</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">SÍ, ELIMINAR MI CUENTA PERMANENTEMENTE</button>
+            <a href="{% url 'core:profile_detail' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+{% endblock content %}

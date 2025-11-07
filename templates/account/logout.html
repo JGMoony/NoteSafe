@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% translate "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>{% translate "Cerrar Sesión" %}</h2>
+    <p>{% translate '¿Estás seguro que quieres cerrar tu sesión?' %}</p>
+
+    <a href="{% url 'account_logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+</div>
+{% endblock %}

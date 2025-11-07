@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% translate "Social Account Login" %}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>{% translate "Iniciar Sesión con Google" %}</h2>
+    
+    <p>{% translate "Estás a punto de iniciar sesión con tu cuenta de Google." %}</p>
+
+    <p>
+        {% translate "Si ya tienes una cuenta local o social en NoteSafe, serás redirigido a ella." %}
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <button class="btn btn-primary" type="submit">{% translate "Continuar" %}</button>
+            <a href="{% url 'account_login' %}" class="btn btn-secondary">{% translate "Cancelar" %}</a>
+        </p>
+    </form>
+</div>
+{% endblock %}

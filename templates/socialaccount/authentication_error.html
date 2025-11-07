@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% translate "Error de Autenticación" %}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>{% translate "Error de Autenticación Social" %} </h2>
+
+    <p>{% translate "Ha ocurrido un error durante la autenticación con tu proveedor social (Google)." %}</p>
+
+    {% if error_message %}
+        <p><strong>Detalle del error:</strong> {{ error_message }}</p>
+    {% endif %}
+
+    <p>{% translate "Por favor, inténtalo de nuevo, o utiliza el inicio de sesión local." %}</p>
+
+    <a href="{% url 'account_login' %}" class="btn btn-primary">Volver al Inicio de Sesión</a>
+</div>
+{% endblock %}

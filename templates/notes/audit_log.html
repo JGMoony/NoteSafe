@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block head_title %}Historial de Auditoría{% endblock %}
+
+{% block content %}
+    <div class="audit-log-container">
+        <h1>Historial de Actividad</h1>
+        <p>Este es el registro de tus acciones importantes, incluyendo gestión de notas y eventos de autenticación.</p>
+        <hr>
+
+        {% if logs %}
+            <table class="audit-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha/Hora</th>
+                        <th>Acción</th>
+                        <th>Detalle de la Nota</th>
+                        <th>IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                        <tr class="log-{{ log.action|lower|cut:'_' }}">
+                            <td>{{ log.pk }}</td>
+                            <td>{{ log.timestamp|date:"j M, Y H:i:s" }}</td>
+                            <td class="log-action">
+                                <strong>{{ log.get_action_display|default:log.action }}</strong>
+                            </td>
+                            <td>
+                                {% if log.note_title %}
+                                    Nota: "{{ log.note_title }}"
+                                {% elif log.extra %}
+                                    {{ log.extra }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>{{ log.ip_address|default:"N/A" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <div class="pagination">
+            </div>
+
+        {% else %}
+            <p>Aún no hay registros de actividad para tu cuenta.</p>
+        {% endif %}
+
+    </div>
+{% endblock content %}

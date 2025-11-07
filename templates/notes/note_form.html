@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+    {% if object %}Editar Nota: {{ object.title }}{% else %}Crear Nueva Nota{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="note-form-container">
+        <h1>
+            {% if object %}
+                Editar Nota: {{ object.title }}
+            {% else %}
+                Crear Nueva Nota
+            {% endif %}
+        </h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary">
+                {% if object %}Guardar Cambios{% else %}Crear Nota{% endif %}
+            </button>
+            
+            {% if object %}
+                <a href="{% url 'notes:note_detail' pk=object.pk %}" class="btn btn-secondary">Cancelar</a>
+            {% else %}
+                <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancelar</a>
+            {% endif %}
+        </form>
+    </div>
+{% endblock content %}

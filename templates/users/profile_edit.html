@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head_title %}Editar Perfil{% endblock %}
+
+{% block content %}
+    <div class="profile-edit-container">
+        <h1>Editar Perfil</h1>
+        <p>Edita tu información personal aquí.</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+        
+        <hr>
+            
+        <p>
+            Para cambiar tu correo electrónico o contraseña, por favor, utiliza las opciones de
+            <a href="{% url 'account_email' %}">Gestión de Correo</a> o
+            <a href="{% url 'account_change_password' %}">Cambio de Contraseña</a> de Django Allauth.
+        </p>
+    </div>
+{% endblock content %}

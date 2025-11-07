@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block head_title %}Mis Notas Personales{% endblock %}
+
+{% block content %}
+    <div class="note-header">
+        <h1>Mis Notas</h1>
+        <a href="{% url 'notes:note_create' %}" class="btn btn-success">
+            + Crear Nueva Nota
+        </a>
+    </div>
+
+    <form method="get" class="search-form">
+        <input type="text" name="q" placeholder="Buscar por título, contenido o etiqueta..." value="{{ search_query }}" style="width: 80%; padding: 8px;">
+        <button type="submit" class="btn btn-primary" style="padding: 8px 15px;">Buscar</button>
+        {% if search_query %}
+            <p>Mostrando resultados para: <strong>"{{ search_query }}"</strong>. <a href="{% url 'notes:note_list' %}">Limpiar búsqueda</a></p>
+        {% endif %}
+    </form>
+    <hr>
+    
+    {% if notes %}
+        <ul class="note-list">
+            {% for note in notes %}
+                <li class="note-item {% if note.important %}note-important{% endif %}">
+                    <h3>
+                        <a href="{% url 'notes:note_detail' pk=note.pk %}">{{ note.title }}</a> 
+                        {% if note.important %}
+                            Importante
+                        {% endif %}
+                    </h3>
+                    
+                    <p class="note-meta">
+                        Actualizado: {{ note.updated_at|date:"j M, Y H:i" }} | 
+                        Etiquetas: 
+                        {% for tag in note.tags.all %}
+                            <span class="tag">{{ tag.name }}</span>
+                        {% empty %}
+                            Ninguna
+                        {% endfor %}
+                    </p>
+                    
+                    <div class="note-actions">
+                        <a href="{% url 'notes:note_update' pk=note.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'notes:note_delete' pk=note.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aún no tienes notas.</p>
+    {% endif %}
+
+{% endblock content %}

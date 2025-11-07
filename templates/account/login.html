@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load socialaccount %}
+
+{% block head_title %}{% translate "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Iniciar Sesión</h2>
+    <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary">{% translate "Iniciar Sesión" %}</button>
+    </form>
+    
+    <p>
+        ¿No tienes cuenta? <a href="{% url 'account_signup' %}">Registrarse</a>
+    </p>
+
+    
+    <div class="social-login">
+        <h3>Opciones Sociales</h3>
+        <p>Inicia sesión con tu cuenta de Google:</p>
+        <a href="{% provider_login_url 'google' %}" class="btn btn-google">
+            <i class="fab fa-google"></i> Continuar con Google
+        </a>
+        <hr>
+    </div>
+</div>
+{% endblock %}
