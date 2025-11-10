@@ -1,14 +1,39 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 
 {% block head_title %}{% translate "Sign Out" %}{% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <h2>{% translate "Cerrar Sesión" %}</h2>
-    <p>{% translate '¿Estás seguro que quieres cerrar tu sesión?' %}</p>
+<div class="container container-sm" style="padding: 3rem 1rem;">
+    <div class="card">
+        <div class="card-header text-center">
+            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                <div style="background: #fef3c7; padding: 0.75rem; border-radius: 50%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#f59e0b">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+            </div>
+            <h2>Cerrar Sesión</h2>
+            <p class="card-description">¿Estás seguro que quieres cerrar tu sesión?</p>
+        </div>
 
-    <a href="{% url 'account_logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+        <div class="card-body">
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <div class="flex gap-3">
+                    <a href="{% url 'notes:note_list' %}" class="btn btn-outline" style="flex: 1;">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger" style="flex: 1;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
