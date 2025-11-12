@@ -1,21 +1,44 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 
 {% block head_title %}{% translate "Error de Autenticación" %}{% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <h2>{% translate "Error de Autenticación Social" %} </h2>
+<div class="container container-sm" style="padding: 3rem 1rem;">
+    <div class="card">
+        <div class="card-header text-center">
+            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                <div style="background: #fee2e2; padding: 0.75rem; border-radius: 50%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#ef4444">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </div>
+            <h2>Error de Autenticación Social</h2>
+            <p class="card-description">No se pudo completar el inicio de sesión</p>
+        </div>
 
-    <p>{% translate "Ha ocurrido un error durante la autenticación con tu proveedor social (Google)." %}</p>
+        <div class="card-body">
+            <div class="alert alert-danger mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                    <p>Ha ocurrido un error durante la autenticación con tu proveedor social (Google).</p>
+                    {% if error_message %}
+                        <p class="mt-2"><strong>Detalle del error:</strong> {{ error_message }}</p>
+                    {% endif %}
+                </div>
+            </div>
 
-    {% if error_message %}
-        <p><strong>Detalle del error:</strong> {{ error_message }}</p>
-    {% endif %}
+            <p class="text-center text-muted mb-4">
+                Por favor, inténtalo de nuevo, o utiliza el inicio de sesión local.
+            </p>
 
-    <p>{% translate "Por favor, inténtalo de nuevo, o utiliza el inicio de sesión local." %}</p>
-
-    <a href="{% url 'account_login' %}" class="btn btn-primary">Volver al Inicio de Sesión</a>
+            <a href="{% url 'account_login' %}" class="btn btn-primary w-full">
+                Volver al Inicio de Sesión
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}

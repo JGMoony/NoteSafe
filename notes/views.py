@@ -56,6 +56,11 @@ class NoteCreateView(LoginRequiredMixin, CreateView):
     form_class = NoteForm
     template_name = 'notes/note_form.html'
     success_url = reverse_lazy('notes:note_list')
+    def get_form_kwargs(self):
+        """ Pasa el usuario actual al constructor del formulario """
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user  # Inyecta el usuario
+        return kwargs
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -74,6 +79,12 @@ class NoteUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Note
     form_class = NoteForm
     template_name = 'notes/note_form.html'
+
+    def get_form_kwargs(self):
+        """ Pasa el usuario actual al constructor del formulario """
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user  # Inyecta el usuario
+        return kwargs
 
     def get_success_url(self):
         return reverse_lazy('notes:note_detail', kwargs={'pk': self.object.pk})

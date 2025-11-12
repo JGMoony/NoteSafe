@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+
+{% block head_title %}Panel de Administración | NoteSafe{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="page-header">
+        <h1>Panel de Administración</h1>
+        <p class="text-muted">Vista centralizada para supervisar la seguridad y actividad del sistema.</p>
+    </div>
+
+    <div class="grid-3-cols mt-4">
+        <div class="card card-stat">
+            <h2 class="stat-value">{{ total_users|intcomma }}</h2>
+            <p class="stat-label">Usuarios Registrados</p>
+        </div>
+        <div class="card card-stat">
+            <h2 class="stat-value">{{ total_notes|intcomma }}</h2>
+            <p class="stat-label">Notas Totales Creadas</p>
+        </div>
+        <div class="card card-stat">
+            <h2 class="stat-value">{{ total_notes|floatformat:0 }}</h2>
+            <p class="stat-label">Proyección (Seguridad)</p>
+            <small class="text-muted">Monitorea uso elevado.</small>
+        </div>
+    </div>
+
+    <div class="grid-2-cols mt-5">
+        
+        <div class="card">
+            <h2>Logs de Seguridad Críticos</h2>
+            <p class="text-muted">Últimos 5 eventos de alto riesgo (Fallos de Login, Eliminación de Cuentas, etc.).</p>
+            <ul class="list-group">
+                {% for log in critical_logs %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="badge badge-warning">{{ log.get_action_display }}</span>
+                        <span class="text-sm">Usuario: <strong>{{ log.user.email }}</strong></span>
+                    </div>
+                    <small class="text-muted">{{ log.timestamp|naturaltime }}</small>
+                </li>
+                {% empty %}
+                <li class="list-group-item">No se encontraron logs críticos recientes.</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'notes:audit_log' %}" class="btn btn-primary-outline btn-block mt-3">Ver Auditoría Completa →</a>
+        </div>
+
+        <div class="card">
+            <h2>Usuarios Más Activos</h2>
+            <p class="text-muted">Top 5 usuarios por número de notas creadas. (Monitoreo de uso)</p>
+            <ul class="list-group">
+                {% for user in active_users %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        {{ forloop.counter }}. <strong>{{ user.nombre }}</strong> ({{ user.email }})
+                    </div>
+                    <span class="badge badge-secondary">{{ user.note_count }} notas</span>
+                </li>
+                {% empty %}
+                <li class="list-group-item">Aún no hay usuarios activos con notas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="card mt-5">
+        <h2>Herramientas de Gestión Rápida</h2>
+        <div class="button-group">
+            <a href="{% url 'admin:users_user_changelist' %}" class="btn btn-secondary">
+                <i class="icon-users"></i> Gestión de Cuentas
+            </a>
+            <button class="btn btn-danger-outline" onclick="alert('Funcionalidad de Purga de Logs Pendiente')">
+                <i class="icon-trash"></i> Purgar Logs Antiguos
+            </button>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

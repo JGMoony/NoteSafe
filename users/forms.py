@@ -1,6 +1,7 @@
 from django import forms
 from allauth.account.forms import SignupForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 import pytz
 
 User = get_user_model()
@@ -26,3 +27,14 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['nombre', 'apellido', 'timezone', 'theme']
+        
+        
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('email', 'nombre', 'apellido',) 
+        
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = '__all__'

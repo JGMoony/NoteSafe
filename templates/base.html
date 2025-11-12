@@ -1,48 +1,90 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+{% if user.is_authenticated and user.theme == "dark" %}
+    <html lang="es" data-theme="oscuro">
+{% else %}
+    <html lang="es" data-theme="claro">
+{% endif %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block head_title %}NoteSafe{% endblock %}</title>
-    <style>
-        body { font-family: sans-serif; margin: 20px; }
-        .auth-container { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        .btn { padding: 10px 15px; text-decoration: none; border-radius: 5px; cursor: pointer; }
-        .btn-primary { background-color: #007bff; color: white; border: none; }
-        .btn-success { background-color: #28a745; color: white; border: none; }
-        .btn-danger { background-color: #dc3545; color: white; border: none; }
-        .btn-google { background-color: #db4437; color: white; border: none; display: block; text-align: center; margin-bottom: 10px; }
-        .alert-danger { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; margin-bottom: 10px; border-radius: 4px;}
-    </style>
+    <link rel="stylesheet" href="{% static 'css/notesafe-styles.css' %}">
+    {% block extra_css %}{% endblock %} 
 </head>
 <body>
     <header>
-        <nav>
-            {% if user.is_authenticated %}
-                <a href="{% url 'notes:note_list' %}">Inicio</a>
-                | Bienvenido, {{ user.nombre }} |
-                {% if user.is_superuser or user.role == 'admin' %}
-                    | <a href="{% url 'notes:audit_log' %}">Auditoría (Admin)</a> |
+        <nav class="main-nav">
+            <a href="
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser or user.role == 'admin' %}
+                        {% url 'users:admin_dashboard' %}  {% else %}
+                        {% url 'notes:note_list' %}
+                    {% endif %}
+                {% else %}
+                    {% url 'account_login' %}
                 {% endif %}
-                <a href="{% url 'users:profile_detail' %}" class="btn btn-primary">Mi Perfil</a>
-                | <a href="{% url 'notes:audit_log' %}" class="btn btn-primary">Historial de Actividad</a> |
-                <a href="{% url 'notes:audit_log' %}">Auditoría |
-                <a href="{% url 'account_logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+            " class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>NoteSafe</span>
+            </a>
+
+            {% if user.is_authenticated %}
+                <div class="nav-links">
+                    
+                    {% if user.is_superuser or user.role == 'admin' %}
+                        <a href="{% url 'users:admin_dashboard' %}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Panel Admin
+                        </a>
+                        
+                        <a href="{% url 'notes:audit_log' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            Auditoría
+                        </a>
+                    {% else %}
+                        <a href="{% url 'notes:note_list' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Mis Notas
+                        </a>
+                    {% endif %}
+                    
+                    </div>
+
+                <div class="user-menu">
+                    <span class="text-sm text-muted">Bienvenido, {{ user.nombre|capfirst }}</span>
+                    <a href="{% url 'users:profile_detail' %}" class="btn btn-ghost btn-sm">Mi Perfil</a> <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+                </div>
             {% else %}
-                <a href="{% url 'account_login' %}">Iniciar Sesión</a>
-                <a href="{% url 'account_signup' %}">Registrarse</a>
+                <div class="nav-links">
+                    <a href="{% url 'account_login' %}" class="btn btn-ghost">Iniciar Sesión</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary">Registrarse</a>
+                </div>
             {% endif %}
         </nav>
-        <hr>
     </header>
 
-    {% block content %}
-    {% endblock content %}
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
 
     <footer>
-        <hr>
-        <p>&copy; NoteSafe {{ current_year }}</p>
+        <div class="footer-content">
+            {% now "Y" as current_year %}
+            <p class="text-sm text-muted">
+                &copy; {{ current_year }} NoteSafe. Todos los derechos reservados.
+            </p>
+        </div>
     </footer>
+
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

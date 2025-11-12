@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import UpdateView, DetailView, DeleteView
+from django.views.generic import UpdateView, DetailView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.db.models import Count
-from notes.models import Note, Tag
+from notes.models import Note, Tag, AuditLog
 from .forms import ProfileUpdateForm
+from users.models import User
+
 
 User = get_user_model()
 
@@ -63,3 +65,25 @@ class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.get_object() == self.request.user
+    
+class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+    template_name = 'users/admin_dashboard.html'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_superuser or user.role == User.ADMIN 
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['total_users'] = User.objects.count()
+        context['total_notes'] = Note.objects.count()
+        context['active_users'] = User.objects.annotate(
+            note_count=Count('note')
+        ).filter(note_count__gt=0).order_by('-note_count')[:5]
+        
+        context['critical_logs'] = AuditLog.objects.filter(
+            action__in=['LOGIN_FAIL', 'NOTE_DELETED_PERMANENTLY', 'ACCOUNT_DELETED']
+        ).select_related('user').order_by('-timestamp')[:5] 
+        
+        return context

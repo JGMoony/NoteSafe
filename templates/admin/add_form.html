@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n admin_urls static %}
+
+{% block content %}
+<div id="content-main">
+    <div class="module" id="add-user-form">
+        
+        <h1>{% translate "Añadir usuario" %}</h1>
+        
+        {% url opts|admin_urlname:'changelist' as changelist_url %}
+        <p class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a> &rsaquo;
+            <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Select {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
+            {% translate 'Add' %}
+        </p>
+
+        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{% url opts|admin_urlname:'add' %}" method="post" id="{{ opts.model_name }}_form" novalidate>
+            {% csrf_token %}
+            
+            <div>
+            
+                {% if errors %}
+                    <p class="errornote">
+                        {% if errors|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+                    </p>
+                    {{ adminform.form.non_field_errors }}
+                {% endif %}
+                
+                {% for fieldset in adminform %}
+                    <fieldset class="module aligned {{ fieldset.classes }}">
+                        {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+                        {% if fieldset.description %}
+                            <div class="description">{{ fieldset.description|safe }}</div>
+                        {% endif %}
+                        {% for line in fieldset %}
+                            <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+                                {% for field in line %}
+                                    <div{% if not line.show_label %} class="fieldBox"{% endif %}>
+                                        {% if line.show_label %}{{ field.label_tag }}{% endif %}
+                                        {% if field.is_readonly %}
+                                            <p>{{ field.contents }}</p>
+                                        {% else %}
+                                            {{ field.field }}
+                                        {% endif %}
+                                        {% if field.field.help_text %}
+                                            <p class="help">{{ field.field.help_text|safe }}</p>
+                                        {% endif %}
+                                        {% if field.errors %}
+                                            <ul class="errorlist">{% for error in field.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                {% endfor %}
+
+                <div class="submit-row">
+                    <input type="submit" value="{% translate 'Save' %}" class="default" name="_save">
+                </div>
+            
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
