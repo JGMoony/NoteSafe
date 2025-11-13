@@ -1,4 +1,6 @@
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import UpdateView, DetailView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
@@ -24,6 +26,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         return context
     
+    
 class ProfileDetailView(DetailView, LoginRequiredMixin):
     model = User
     template_name = 'users/profile_detail.html'
@@ -48,6 +51,7 @@ class ProfileDetailView(DetailView, LoginRequiredMixin):
         
         return context
 
+
 class AccountDeleteView(LoginRequiredMixin, DeleteView):
     model = User
     template_name = 'core/profile_confirm_delete.html'
@@ -57,7 +61,6 @@ class AccountDeleteView(LoginRequiredMixin, DeleteView):
         return self.request.user
     
     
-# ELIMINACIÓN DE PERFIL
 class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
     template_name = 'users/profile_confirm_delete.html'
@@ -65,6 +68,7 @@ class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.get_object() == self.request.user
+    
     
 class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = 'users/admin_dashboard.html'
@@ -87,3 +91,14 @@ class AdminDashboardView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         ).select_related('user').order_by('-timestamp')[:5] 
         
         return context
+    
+def admin_home_view(request):
+    context = {} 
+    return render(request, 'users/admin_home.html', context)
+
+@login_required
+def custom_redirect_view(request):
+    if request.user.is_staff or request.user.is_superuser or request.user.role == 'admin':
+        return redirect('users:admin_home')
+    else:
+        return redirect('notes:note_list')

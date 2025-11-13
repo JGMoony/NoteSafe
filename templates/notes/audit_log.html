@@ -1,24 +1,29 @@
 {% extends "base.html" %}
+{% load i18n static %}
 
 {% block head_title %}Historial de Auditoría{% endblock %}
 
 {% block content %}
 <div class="container container-lg">
     <div class="mb-6">
-        <h1 style="margin-bottom: 0.5rem;">Historial de Actividad</h1>
+        <h1>{% translate "Historial de Actividad" %}</h1>
         <p class="text-muted">
-            Registro de tus acciones importantes, incluyendo gestión de notas y eventos de autenticación
+            {% translate "Registro de acciones importantes, incluyendo gestión de notas y eventos de autenticación." %}
         </p>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Registro de Auditoría</h2>
+            <h2 class="card-title">{% translate "Registro de Auditoría" %}</h2>
             <p class="card-description">
                 {% if logs %}
-                    {{ logs|length }} evento{{ logs|length|pluralize }} registrado{{ logs|length|pluralize }}
+                    {% blocktranslate count logs_count=logs|length %}
+                        {{ logs_count }} evento registrado
+                    {% plural %}
+                        {{ logs_count }} eventos registrados
+                    {% endblocktranslate %}
                 {% else %}
-                    Sin eventos registrados
+                    {% translate "Sin eventos registrados" %}
                 {% endif %}
             </p>
         </div>
@@ -30,9 +35,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 80px;">ID</th>
-                                <th>Fecha/Hora</th>
-                                <th>Acción</th>
-                                <th>Detalle</th>
+                                <th>{% translate "Fecha/Hora" %}</th>
+                                {% if request.user.is_staff or request.user.is_superuser %}
+                                    <th>{% translate "Usuario" %}</th>
+                                {% endif %}
+                                
+                                <th>{% translate "Acción" %}</th>
+                                <th>{% translate "Detalle" %}</th>
                                 <th style="width: 120px;">IP</th>
                             </tr>
                         </thead>
@@ -45,48 +54,58 @@
                                     <td class="text-sm">
                                         {{ log.timestamp|date:"j M, Y H:i:s" }}
                                     </td>
+                                    
+                                    {# 🚨 Mostrar email de Usuario solo para administradores #}
+                                    {% if request.user.is_staff or request.user.is_superuser %}
+                                        <td>
+                                            {# El log.user debe existir si estás registrando la actividad #}
+                                            <strong>{{ log.user.email }}</strong>
+                                        </td>
+                                    {% endif %}
+                                    
                                     <td>
+                                        {# Lógica para mostrar las insignias (badges) según la acción #}
                                         {% if log.action == 'NOTE_CREATED' %}
                                             <span class="badge badge-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;margin-right:2px;">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                                 </svg>
-                                                Nota Creada
+                                                {% translate "Nota Creada" %}
                                             </span>
                                         {% elif log.action == 'NOTE_UPDATED' %}
                                             <span class="badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;margin-right:2px;">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                 </svg>
-                                                Nota Actualizada
+                                                {% translate "Nota Actualizada" %}
                                             </span>
                                         {% elif log.action == 'NOTE_DELETED' %}
                                             <span class="badge badge-danger">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;margin-right:2px;">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
-                                                Nota Eliminada
+                                                {% translate "Nota Eliminada" %}
                                             </span>
                                         {% elif log.action == 'LOGIN' %}
                                             <span class="badge badge-outline">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;margin-right:2px;">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                                 </svg>
-                                                Inicio de Sesión
+                                                {% translate "Inicio de Sesión" %}
                                             </span>
                                         {% elif log.action == 'LOGOUT' %}
                                             <span class="badge badge-outline">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;margin-right:2px;">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                                 </svg>
-                                                Cierre de Sesión
+                                                {% translate "Cierre de Sesión" %}
                                             </span>
                                         {% elif log.action == 'SIGNUP' %}
                                             <span class="badge badge-success">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;margin-right:2px;">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                                                 </svg>
-                                                Registro
+                                                {% translate "Registro" %}
                                             </span>
                                         {% else %}
                                             <span class="badge">{{ log.get_action_display|default:log.action }}</span>
@@ -94,7 +113,7 @@
                                     </td>
                                     <td>
                                         {% if log.note_title %}
-                                            <span>Nota: <strong>"{{ log.note_title }}"</strong></span>
+                                            <span>{% translate "Nota" %}: <strong>"{{ log.note_title }}"</strong></span>
                                         {% elif log.extra %}
                                             <span class="text-muted">{{ log.extra }}</span>
                                         {% else %}
@@ -115,7 +134,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <p class="text-muted">
-                        Aún no hay registros de actividad para tu cuenta.
+                        {% translate "Aún no hay registros de actividad para mostrar." %}
                     </p>
                 </div>
             {% endif %}

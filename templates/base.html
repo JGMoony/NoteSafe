@@ -15,10 +15,11 @@
 <body>
     <header>
         <nav class="main-nav">
+            
             <a href="
                 {% if user.is_authenticated %}
-                    {% if user.is_superuser or user.role == 'admin' %}
-                        {% url 'users:admin_dashboard' %}  {% else %}
+                    {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
+                        {% url 'users:admin_home' %}{% else %}
                         {% url 'notes:note_list' %}
                     {% endif %}
                 {% else %}
@@ -34,19 +35,22 @@
             {% if user.is_authenticated %}
                 <div class="nav-links">
                     
-                    {% if user.is_superuser or user.role == 'admin' %}
-                        <a href="{% url 'users:admin_dashboard' %}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
+                    {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
+                        
+                        <a href="{% url 'users:admin_home' %}"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                             </svg>
-                            Panel Admin
+                            Inicio
                         </a>
                         
-                        <a href="{% url 'notes:audit_log' %}">
+                        <a href="{% url 'admin:users_user_changelist' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm-6.5-2a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
                             </svg>
-                            Auditoría
+                            Gestión Usuarios
                         </a>
+
                     {% else %}
                         <a href="{% url 'notes:note_list' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
@@ -56,11 +60,19 @@
                         </a>
                     {% endif %}
                     
-                    </div>
+                    <a href="{% url 'notes:audit_log' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Auditoría
+                    </a>
+                    
+                </div>
 
                 <div class="user-menu">
                     <span class="text-sm text-muted">Bienvenido, {{ user.nombre|capfirst }}</span>
-                    <a href="{% url 'users:profile_detail' %}" class="btn btn-ghost btn-sm">Mi Perfil</a> <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+                    <a href="{% url 'users:profile_detail' %}" class="btn btn-ghost btn-sm">Mi Perfil</a> 
+                    <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">Cerrar Sesión</a>
                 </div>
             {% else %}
                 <div class="nav-links">

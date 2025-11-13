@@ -9,7 +9,7 @@
         
         {% url opts|admin_urlname:'changelist' as changelist_url %}
         <p class="breadcrumbs">
-            <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a> &rsaquo;
+            <a href="{% url 'users:admin_home' %}">{% translate 'Home' %}</a> &rsaquo;
             <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Select {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
             {% translate 'Add' %}
         </p>
@@ -26,30 +26,35 @@
                     {{ adminform.form.non_field_errors }}
                 {% endif %}
                 
-                {% for fieldset in adminform %}
-                    <fieldset class="module aligned {{ fieldset.classes }}">
-                        {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
-                        {% if fieldset.description %}
-                            <div class="description">{{ fieldset.description|safe }}</div>
-                        {% endif %}
-                        {% for line in fieldset %}
-                            <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
-                                {% for field in line %}
-                                    <div{% if not line.show_label %} class="fieldBox"{% endif %}>
-                                        {% if line.show_label %}{{ field.label_tag }}{% endif %}
-                                        {% if field.is_readonly %}
-                                            <p>{{ field.contents }}</p>
-                                        {% else %}
-                                            {{ field.field }}
-                                        {% endif %}
-                                        {% if field.field.help_text %}
-                                            <p class="help">{{ field.field.help_text|safe }}</p>
-                                        {% endif %}
-                                        {% if field.errors %}
-                                            <ul class="errorlist">{% for error in field.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
+                {% for fieldset in adminform %}
+                    <fieldset class="module aligned {{ fieldset.classes }}">
+                        {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+                        {% if fieldset.description %}
+                            <div class="description">{{ fieldset.description|safe }}</div>
+                        {% endif %}
+                        {% for line in fieldset %}
+                            <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+                                {% for field in line %}
+                                    <div{% if not line.show_label %} class="fieldBox"{% endif %}>
+                                    
+                                        {{ field.field.label_tag }} 
+                                        
+                                        {% if field.is_readonly %}
+                                            <p>{{ field.contents }}</p>
+                                        {% else %}
+                                            {{ field.field }}
+                                        {% endif %}
+                                        
+                                        {% if field.errors %}
+                                            {{ field.errors }}
+                                        {% endif %}
+                                        
+                                        {% if field.field.help_text %}
+                                            <p class="help">{{ field.field.help_text|safe }}</p>
+                                        {% endif %}
+
+                                    </div>
+                                {% endfor %}
                             </div>
                         {% endfor %}
                     </fieldset>

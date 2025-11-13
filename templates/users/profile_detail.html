@@ -59,6 +59,7 @@
         </div>
     </div>
 
+    {% if user.is_authenticated and not user.is_staff and not user.role == 'admin' %}
     <div class="card mb-4">
         <div class="card-header">
             <h2 class="card-title">Estadísticas de Uso</h2>
@@ -102,8 +103,12 @@
             </div>
         </div>
     </div>
+    {% else %}
+        <div class="alert alert-warning">
+            Estadisticas de uso disponibles solo para usuarios estándar.
+        </div>
+    {% endif %}
 
-    <!-- Actions -->
     <div class="card mb-4">
         <div class="card-header">
             <h2 class="card-title">Acciones de Cuenta</h2>
@@ -129,7 +134,7 @@
     <!-- Delete Account -->
     <div class="card" style="border-color: var(--destructive);">
         <div class="card-header">
-            <h2 class="card-title" style="color: var(--destructive);">Zona de Peligro</h2>
+            <h2 class="card-title" style="color: var(--destructive);">Eliminar Cuenta</h2>
             <p class="card-description">Acciones irreversibles en tu cuenta</p>
         </div>
         <div class="card-body">

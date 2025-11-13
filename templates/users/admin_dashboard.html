@@ -28,25 +28,6 @@
     </div>
 
     <div class="grid-2-cols mt-5">
-        
-        <div class="card">
-            <h2>Logs de Seguridad Críticos</h2>
-            <p class="text-muted">Últimos 5 eventos de alto riesgo (Fallos de Login, Eliminación de Cuentas, etc.).</p>
-            <ul class="list-group">
-                {% for log in critical_logs %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <span class="badge badge-warning">{{ log.get_action_display }}</span>
-                        <span class="text-sm">Usuario: <strong>{{ log.user.email }}</strong></span>
-                    </div>
-                    <small class="text-muted">{{ log.timestamp|naturaltime }}</small>
-                </li>
-                {% empty %}
-                <li class="list-group-item">No se encontraron logs críticos recientes.</li>
-                {% endfor %}
-            </ul>
-            <a href="{% url 'notes:audit_log' %}" class="btn btn-primary-outline btn-block mt-3">Ver Auditoría Completa →</a>
-        </div>
 
         <div class="card">
             <h2>Usuarios Más Activos</h2>
@@ -67,14 +48,11 @@
     </div>
     
     <div class="card mt-5">
-        <h2>Herramientas de Gestión Rápida</h2>
+        <h2>Gestionar usuarios</h2>
         <div class="button-group">
             <a href="{% url 'admin:users_user_changelist' %}" class="btn btn-secondary">
                 <i class="icon-users"></i> Gestión de Cuentas
             </a>
-            <button class="btn btn-danger-outline" onclick="alert('Funcionalidad de Purga de Logs Pendiente')">
-                <i class="icon-trash"></i> Purgar Logs Antiguos
-            </button>
         </div>
     </div>
 

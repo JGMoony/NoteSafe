@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% translate "Inicio del Administrador" %}{% endblock %}
+
+{% block content %}
+<div id="content-main" class="welcome-dashboard">
+    <div class="module">
+        <h1>{% translate "Bienvenido, " %}{{ request.user.nombre }}!</h1> 
+        <p class="description">{% translate "Este es el panel principal de inicio para la administración de NoteSafe. Utiliza la barra de navegación para acceder a las secciones del sistema." %}</p>
+        
+        <hr>
+
+        <h2>{% translate "Accesos Rápidos" %}</h2>
+        <ul class="admin-quick-links">
+            <li>
+                <p>
+                    <a href="{% url 'users:admin_dashboard' %}">
+                        {% translate "Panel de Administrador" %}
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="{% url 'admin:users_user_changelist' %}">
+                        {% translate "Gestión de Usuarios" %}
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="{% url 'notes:audit_log' %}">
+                        {% translate "Auditoría y Registro de Actividad" %} 
+                        <span style="font-size: 0.8em; color: gray;"></span>
+                    </a>
+                </p>
+            </li>
+        </ul>
+
+    </div>
+</div>
+{% endblock %}

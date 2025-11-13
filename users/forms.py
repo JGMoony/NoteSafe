@@ -30,9 +30,22 @@ class ProfileUpdateForm(forms.ModelForm):
         
         
 class CustomUserCreationForm(UserCreationForm):
+    
+    password2 = forms.CharField(label='Contraseña (confirmación)', widget=forms.PasswordInput)
+    
     class Meta:
         model = User
-        fields = ('email', 'nombre', 'apellido',) 
+        fields = ('email', 'nombre', 'apellido', 'role') 
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+        
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
         
 class CustomUserChangeForm(UserChangeForm):
     class Meta:

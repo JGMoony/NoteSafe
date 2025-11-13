@@ -125,7 +125,8 @@ USE_TZ = True
 SESSION_COOKIE_AGE = 300
 SESSION_SAVE_EVERY_REQUEST = True
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'redirect_home'
+LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 STATIC_URL = 'static/'

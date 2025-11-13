@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n admin_urls static %}
+
+{% block content %}
+<div id="content-main">
+    <h1>{% translate "Panel de Administración" %}</h1>
+
+    <p>{% translate "Bienvenido al Panel de Administración. Esta es la vista por defecto." %}</p>
+    
+    {% url 'admin:app_list' 'users' as users_url %}
+    <p><a href="{{ users_url }}">{% translate "Ir al listado de usuarios" %}</a></p>
+
+</div>
+{% endblock %}

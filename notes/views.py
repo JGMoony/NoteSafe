@@ -131,4 +131,11 @@ class AuditLogListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return AuditLog.objects.filter(user=self.request.user).order_by('-timestamp')
+        user = self.request.user
+        
+        if user.is_staff or user.is_superuser:
+            queryset = AuditLog.objects.all().order_by('-timestamp')
+        else:
+            queryset = AuditLog.objects.filter(user=user).order_by('-timestamp')
+            
+        return queryset

@@ -2,6 +2,8 @@
 {% load i18n admin_urls static %}
 {% load custom_filters %}
 
+{% with search_var=cl.search_field|default:"q" %}
+
 {% block content %}
 <div id="content-main">
     <div class="module" id="changelist">
@@ -55,27 +57,35 @@
                 <table id="result_list" class="full-width"> 
                     <thead>
                         <tr>
+                            <th scope="col"><span></span></th> 
+                            <th scope="col"><span></span></th> 
                             <th scope="col"><span>Email</span></th>
                             <th scope="col"><span>Nombre</span></th>
                             <th scope="col"><span>Apellido</span></th>
                             <th scope="col"><span>Role</span></th>
                             <th scope="col"><span>Es Staff</span></th>
                             <th scope="col"><span>Activo</span></th>
+                            <th scope="col"><span>Acciones</span></th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for row_object in cl.queryset %} 
                     <tr class="{% cycle 'row1' 'row2' %}">
-                        {% for field_name in cl.list_display %}
-                            {% if forloop.first %}
-                                <td><a href="{% url opts|admin_urlname:'change' row_object.pk|admin_urlquote %}">{{ row_object|dict_get:field_name }}</a></td>
-                            {% else %}
-                                <td>{{ row_object|dict_get:field_name }}</td>
-                            {% endif %}
+                        <td></td> 
+                        
+                        <td><a href="{% url opts|admin_urlname:'change' row_object.pk|admin_urlquote %}">{{ row_object|dict_get:cl.list_display.0 }}</a></td>
+                        
+                        {% for field_name in cl.list_display|slice:"1:" %}
+                            <td>{{ row_object|dict_get:field_name }}</td>
                         {% endfor %}
+
+                        <td class="action-column">
+                            <a href="{% url opts|admin_urlname:'change' row_object.pk|admin_urlquote %}" class="btn btn-sm btn-ghost">Editar</a>
+                            <a href="{% url opts|admin_urlname:'delete' row_object.pk|admin_urlquote %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
                     </tr>
                     {% empty %}
-                    <tr><td colspan="{{ cl.list_display|length }}">{% translate "No items available" %}</td></tr>
+                    <tr><td colspan="{{ cl.list_display|length|add:2 }}">{% translate "No items available" %}</td></tr>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -120,8 +130,8 @@
             {% endif %}         
             
             </form>
-
         </div>
     </div>
 </div>
 {% endblock content %}
+{% endwith %}

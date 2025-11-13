@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n admin_urls static %}
+
+{% block content %}
+<div id="content-main">
+    <div class="module" id="delete-user-confirmation">
+        
+        <h1>{% blocktranslate with object_name=opts.verbose_name %}Delete {{ object_name }}{% endblocktranslate %}</h1>
+        
+        {% url opts|admin_urlname:'changelist' as changelist_url %}
+        <p class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a> &rsaquo;
+            <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Select {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
+            {% blocktranslate with obj=object %}Delete {{ obj }}{% endblocktranslate %}
+        </p>
+
+        {% if perms_lacking %}
+            <p class="errornote">
+            {% if perms_needed %}
+                {% blocktranslate %}Deleting the selected object requires permissions which you don't have.{% endblocktranslate %}
+            {% else %}
+                {% blocktranslate %}You don't have permissions to delete this object.{% endblocktranslate %}
+            {% endif %}
+            </p>
+        {% elif protected %}
+            <p class="errornote">
+            {% blocktranslate %}Deleting the selected object would require deleting the following related objects, but one or more of them are protected and can't be deleted.{% endblocktranslate %}
+            </p>
+            <ul>
+            {% for obj in protected %}
+                <li>{{ obj }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>{% blocktranslate %}Are you sure you want to delete the object "{{ object }}"? All of the following related items will be deleted:{% endblocktranslate %}</p>
+            
+            {% if deleted_objects %}
+                <ul class="deleted">
+                {% for deleted_object in deleted_objects %}
+                    <li>{{ deleted_object }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            
+            <form action="" method="post">{% csrf_token %}
+                <div>
+                    <input type="hidden" name="post" value="yes">
+                    <input type="submit" value="{% translate 'Yes, I’m sure' %}">
+                    {% url opts|admin_urlname:'change' object.pk|admin_urlquote as cancel_url %}
+                    <a href="{{ cancel_url }}" class="button cancel-link">{% translate 'No, take me back' %}</a>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
