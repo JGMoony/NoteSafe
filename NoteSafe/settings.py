@@ -16,10 +16,13 @@ if not SECRET_KEY:
     raise Exception("DJANGO_SECRET_KEY no está configurada en el entorno")
 
 # Control de debug
-DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
+DEBUG = os.getenv("DJANGO_DEBUG")
 
 # Hosts permitidos
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 IS_PRODUCTION = not DEBUG
 
@@ -140,7 +143,7 @@ PASSWORD_HASHERS = [
 # Configuración de seguridad HTTPS
 # ==========================
 
-SECURE_SSL_REDIRECT = False if DEBUG else True
+SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
@@ -149,8 +152,8 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SECURE = False if DEBUG else True
-CSRF_USE_SESSIONS = False if DEBUG else True
+CSRF_COOKIE_SECURE = True
+CSRF_USE_SESSIONS = True
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = 'Strict'
 
