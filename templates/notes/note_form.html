@@ -5,19 +5,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="container container-md">
+<div class="container container-md fade-in">
+
     <!-- Back Button -->
-    <a href="{% if object %}{% url 'notes:note_detail' pk=object.pk %}{% else %}{% url 'notes:note_list' %}{% endif %}" class="btn btn-ghost mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    <a href="{% if object %}{% url 'notes:note_detail' pk=object.pk %}{% else %}{% url 'notes:note_list' %}{% endif %}"
+       class="btn btn-ghost mb-4 hover-move text-blue-600 font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
         {% if object %}Volver al detalle{% else %}Volver al listado{% endif %}
     </a>
 
-    <!-- Form Card -->
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">
+    <!-- Card -->
+    <div class="card card-animated border-blue-200">
+        <div class="card-header gradient-header">
+            <h2 class="card-title glow-text">
                 {% if object %}
                     Editar Nota: {{ object.title }}
                 {% else %}
@@ -27,97 +31,105 @@
         </div>
 
         <div class="card-body">
+
             {% if form.errors %}
-                <div class="alert alert-danger mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <div class="alert alert-danger mb-4 shake bg-blue-50 border border-blue-300 text-blue-800 flex items-center gap-2 p-3 rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 
+                              0 9 9 0 0118 0z" />
                     </svg>
-                    <div>
-                        Por favor corrige los errores en el formulario.
-                    </div>
+                    <div>Por favor corrige los errores en el formulario.</div>
                 </div>
             {% endif %}
 
-            <form method="post">
+            <form method="post" class="form-animated">
                 {% csrf_token %}
-                
+
+                <!-- Título -->
                 <div class="form-group">
                     <label for="{{ form.title.id_for_label }}" class="form-label">
                         Título *
                     </label>
-                    {{ form.title }}
+                    <div class="input-wrapper">
+                        {{ form.title }}
+                    </div>
                     {% if form.title.errors %}
-                        <small style="color: var(--destructive); font-size: 0.8125rem;">
-                            {{ form.title.errors.0 }}
-                        </small>
+                        <small class="error-small">{{ form.title.errors.0 }}</small>
                     {% endif %}
                 </div>
 
+                <!-- Contenido -->
                 <div class="form-group">
                     <label for="{{ form.content.id_for_label }}" class="form-label">
                         Contenido *
                     </label>
-                    {{ form.content }}
+                    <div class="input-wrapper">
+                        {{ form.content }}
+                    </div>
                     {% if form.content.errors %}
-                        <small style="color: var(--destructive); font-size: 0.8125rem;">
-                            {{ form.content.errors.0 }}
-                        </small>
+                        <small class="error-small">{{ form.content.errors.0 }}</small>
                     {% endif %}
                     <small class="form-help">Escribe el contenido de tu nota aquí</small>
                 </div>
 
+                <!-- Nuevas etiquetas -->
                 <div class="form-group">
                     <label for="{{ form.new_tags.id_for_label }}" class="form-label">
-                        {{ form.new_tags.label }} </label>
-                    
-                    {{ form.new_tags }} 
-                    
+                        {{ form.new_tags.label }}
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.new_tags }}
+                    </div>
                     {% if form.new_tags.errors %}
-                        <small style="color: var(--destructive); font-size: 0.8125rem;">
-                            {{ form.new_tags.errors.0 }}
-                        </small>
+                        <small class="error-small">{{ form.new_tags.errors.0 }}</small>
                     {% endif %}
-                    
                     <small class="form-help">{{ form.new_tags.help_text }}</small>
                 </div>
 
+                <!-- Etiquetas existentes -->
                 <div class="form-group">
                     <label for="{{ form.tags.id_for_label }}" class="form-label">
                         Etiquetas existentes
                     </label>
-                    {{ form.tags }}
+                    <div class="input-wrapper">
+                        {{ form.tags }}
+                    </div>
                 </div>
 
+                <!-- Importante -->
                 <div class="form-group">
-                    <div class="flex items-center justify-between rounded border p-4">
-                        <div style="flex: 1;">
-                            <label for="{{ form.important.id_for_label }}" class="form-label" style="margin-bottom: 0.25rem;">
+                    <div class="important-box hover:shadow-md transition-shadow">
+                        <div class="imp-left">
+                            <label for="{{ form.important.id_for_label }}" class="form-label">
                                 Marcar como importante
                             </label>
-                            <small class="form-help" style="margin: 0;">
+                            <small class="form-help">
                                 Las notas importantes se destacarán en tu lista
                             </small>
                         </div>
-                        <div>
+                        <div class="imp-right pop">
                             {{ form.important }}
                         </div>
                     </div>
                     {% if form.important.errors %}
-                        <small style="color: var(--destructive); font-size: 0.8125rem;">
-                            {{ form.important.errors.0 }}
-                        </small>
+                        <small class="error-small">{{ form.important.errors.0 }}</small>
                     {% endif %}
                 </div>
 
+                <!-- Botones -->
                 <div class="flex gap-3 mt-6">
-                    <button type="submit" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    <button type="submit" class="btn btn-primary btn-animated">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                         {% if object %}Guardar Cambios{% else %}Crear Nota{% endif %}
                     </button>
-                    
-                    <a href="{% if object %}{% url 'notes:note_detail' pk=object.pk %}{% else %}{% url 'notes:note_list' %}{% endif %}" class="btn btn-outline">
+
+                    <a href="{% if object %}{% url 'notes:note_detail' pk=object.pk %}{% else %}{% url 'notes:note_list' %}{% endif %}" class="btn btn-outline hover-move">
                         Cancelar
                     </a>
                 </div>
@@ -126,35 +138,73 @@
     </div>
 </div>
 
+<!-- 🎨 ESTILOS INTERACTIVOS -->
 <style>
-    .form-group input[type="text"],
-    .form-group textarea,
-    .form-group select {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        font-size: 0.875rem;
-        font-family: inherit;
+    .fade-in { animation: fadeIn 0.5s ease-in-out; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    .hover-move:hover { transform: translateX(-4px); transition: 0.2s; }
+
+    .card-animated {
+        animation: float 0.5s ease-in-out;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #3b82f6;
     }
-    
-    .form-group textarea {
-        min-height: 200px;
-        resize: vertical;
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    @keyframes float {
+        from { transform: translateY(10px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
 
-    .form-group input[type="checkbox"] {
-        width: 1.25rem;
-        height: 1.25rem;
-        cursor: pointer;
+    .gradient-header {
+        background: linear-gradient(90deg, #3b82f6, #6366f1);
+        padding: 1.2rem;
+        color: white;
     }
+    .glow-text { text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+
+    .input-wrapper input,
+    .input-wrapper textarea,
+    .input-wrapper select {
+        width: 100%;
+        padding: 0.55rem 0.75rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        transition: 0.2s;
+    }
+    .input-wrapper input:focus,
+    .input-wrapper textarea:focus,
+    .input-wrapper select:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+        transform: scale(1.01);
+    }
+
+    .shake { animation: shakeAnim 0.3s ease; }
+    @keyframes shakeAnim {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-4px); }
+        50% { transform: translateX(4px); }
+        75% { transform: translateX(-3px); }
+        100% { transform: translateX(0); }
+    }
+    .error-small { color: #ef4444; font-size: 0.8125rem; }
+
+    .important-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #3b82f6;
+        padding: 1rem;
+        border-radius: 12px;
+        background: #f0f9ff;
+    }
+    .pop:hover { transform: scale(1.1); transition: 0.2s; }
+
+    .btn-animated {
+        transition: background 0.2s, transform 0.2s;
+    }
+    .btn-animated:hover { transform: scale(1.05); }
 </style>
 {% endblock content %}
