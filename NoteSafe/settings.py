@@ -16,21 +16,6 @@ if not SECRET_KEY:
     raise Exception("DJANGO_SECRET_KEY no está configurada en el entorno")
 
 # Control de debug
-DEBUG = os.getenv("DJANGO_DEBUG")
-
-# Hosts permitidos
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-
-IS_PRODUCTION = not DEBUG
-# ==========================
-# Seguridad básica
-# ==========================
-
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-if not SECRET_KEY:
-    raise Exception("DJANGO_SECRET_KEY no está configurada en el entorno")
-
-# Control de debug
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
 
 # Hosts permitidos
@@ -45,7 +30,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
