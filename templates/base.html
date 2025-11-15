@@ -1,102 +1,279 @@
 {% load static %}
 <!DOCTYPE html>
+
 {% if user.is_authenticated and user.theme == "dark" %}
-    <html lang="es" data-theme="oscuro">
+<html lang="es" data-theme="oscuro">
 {% else %}
-    <html lang="es" data-theme="claro">
+<html lang="es" data-theme="claro">
 {% endif %}
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block head_title %}NoteSafe{% endblock %}</title>
+
+    <!-- Estilos principales -->
     <link rel="stylesheet" href="{% static 'css/notesafe-styles.css' %}">
-    {% block extra_css %}{% endblock %} 
+
+    <!-- Animaciones e interfaz -->
+    <style>
+        /* NAVBAR */
+        header {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .main-nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* LOGO */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            transition: 0.2s ease-in-out;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius);
+            transition: 0.2s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* BOTONES */
+        .btn-primary {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            transition: 0.2s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-danger:hover {
+            background: #b30000;
+        }
+
+        /* MENÚ USUARIO DROPDOWN */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-menu-button {
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 0;
+            margin-top: 8px;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius);
+            display: none;
+            flex-direction: column;
+            width: 180px;
+            overflow: hidden;
+        }
+
+        .dropdown a {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: 0.2s ease-in-out;
+        }
+
+        .dropdown a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 4rem;
+            padding: 1.5rem;
+            text-align: center;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+
+        /* RESPONSIVE MENU */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                background: var(--bg-card);
+                padding: 1rem;
+                position: absolute;
+                top: 70px;
+                right: 10px;
+                width: 180px;
+                box-shadow: var(--shadow-lg);
+                border-radius: var(--radius);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
 </head>
+
 <body>
-    <header>
-        <nav class="main-nav">
-            
-            <a href="
-                {% if user.is_authenticated %}
-                    {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
-                        {% url 'users:admin_home' %}{% else %}
-                        {% url 'notes:note_list' %}
-                    {% endif %}
+
+<header>
+    <nav class="main-nav">
+
+        <!-- LOGO -->
+        <a href="
+            {% if user.is_authenticated %}
+                {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
+                    {% url 'users:admin_home' %}
                 {% else %}
-                    {% url 'account_login' %}
+                    {% url 'notes:note_list' %}
                 {% endif %}
-            " class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span>NoteSafe</span>
-            </a>
+            {% else %}
+                {% url 'account_login' %}
+            {% endif %}
+        " class="logo">
+            <svg width="20" height="20" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586l6 6V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>NoteSafe</span>
+        </a>
+
+        <!-- BOTÓN MENU RESPONSIVE -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <svg width="26" height="26" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </div>
+
+        <!-- NAV LINKS -->
+        <div class="nav-links" id="navLinks">
 
             {% if user.is_authenticated %}
-                <div class="nav-links">
-                    
-                    {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
-                        
-                        <a href="{% url 'users:admin_home' %}"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            Inicio
-                        </a>
-                        
-                        <a href="{% url 'admin:users_user_changelist' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm-6.5-2a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
-                            </svg>
-                            Gestión Usuarios
-                        </a>
 
-                    {% else %}
-                        <a href="{% url 'notes:note_list' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            Mis Notas
-                        </a>
-                    {% endif %}
-                    
-                    <a href="{% url 'notes:audit_log' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;margin-right:4px;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                        Auditoría
-                    </a>
-                    
-                </div>
+                {% if user.is_staff or user.is_superuser or user.role == "admin" %}
+                    <a href="{% url 'users:admin_home' %}">Inicio</a>
+                    <a href="{% url 'admin:users_user_changelist' %}">Gestión Usuarios</a>
+                {% else %}
+                    <a href="{% url 'notes:note_list' %}">Mis Notas</a>
+                {% endif %}
 
+                <a href="{% url 'notes:audit_log' %}">Auditoría</a>
+
+                <!-- MENÚ USUARIO -->
                 <div class="user-menu">
-                    <span class="text-sm text-muted">Bienvenido, {{ user.nombre|capfirst }}</span>
-                    <a href="{% url 'users:profile_detail' %}" class="btn btn-ghost btn-sm">Mi Perfil</a> 
-                    <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+                    <div class="user-menu-button" onclick="toggleUserMenu()">
+                        👤 {{ user.nombre|capfirst }}
+                    </div>
+
+                    <div class="dropdown" id="userDropdown">
+                        <a href="{% url 'users:profile_detail' %}">Mi Perfil</a>
+                        <a href="{% url 'account_logout' %}">Cerrar Sesión</a>
+                    </div>
                 </div>
+
             {% else %}
-                <div class="nav-links">
-                    <a href="{% url 'account_login' %}" class="btn btn-ghost">Iniciar Sesión</a>
-                    <a href="{% url 'account_signup' %}" class="btn btn-primary">Registrarse</a>
-                </div>
+                <a href="{% url 'account_login' %}" class="btn-ghost">Iniciar Sesión</a>
+                <a href="{% url 'account_signup' %}" class="btn-primary">Registrarse</a>
             {% endif %}
-        </nav>
-    </header>
-
-    <main>
-        {% block content %}
-        {% endblock content %}
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            {% now "Y" as current_year %}
-            <p class="text-sm text-muted">
-                &copy; {{ current_year }} NoteSafe. Todos los derechos reservados.
-            </p>
         </div>
-    </footer>
 
-    {% block extra_js %}{% endblock %}
+    </nav>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    {% now "Y" as current_year %}
+    <p>&copy; {{ current_year }} NoteSafe — Todos los derechos reservados.</p>
+</footer>
+
+<!-- JS PARA INTERACTIVIDAD -->
+<script>
+    function toggleMenu() {
+        document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    function toggleUserMenu() {
+        let dd = document.getElementById("userDropdown");
+        dd.style.display = dd.style.display === "flex" ? "none" : "flex";
+    }
+
+    // Cerrar cuando se hace clic fuera
+    document.addEventListener("click", function(e) {
+        let dropdown = document.getElementById("userDropdown");
+        let menuBtn = document.querySelector(".user-menu-button");
+
+        if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+
+{% block extra_js %}{% endblock %}
 </body>
 </html>

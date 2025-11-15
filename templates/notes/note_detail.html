@@ -3,9 +3,9 @@
 {% block head_title %}Detalle de Nota: {{ note.title }}{% endblock %}
 
 {% block content %}
-<div class="container container-lg">
+<div class="container container-lg fade-in">
     <!-- Back Button -->
-    <a href="{% url 'notes:note_list' %}" class="btn btn-ghost mb-4">
+    <a href="{% url 'notes:note_list' %}" class="btn btn-ghost mb-4 hover-move">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -13,12 +13,12 @@
     </a>
 
     <!-- Note Card -->
-    <div class="card">
-        <div class="card-header">
+    <div class="card card-animated">
+        <div class="card-header gradient-header">
             <div class="flex justify-between items-start gap-4 mb-4" style="flex-wrap: wrap;">
-                <h1 style="margin: 0; flex: 1;">{{ note.title }}</h1>
+                <h1 style="margin: 0; flex: 1; color: #1e3a8a;">{{ note.title }}</h1>
                 {% if note.important %}
-                    <span class="badge badge-warning" style="background: #f59e0b; color: white;">
+                    <span class="badge badge-warning glow-badge">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
                             <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                         </svg>
@@ -29,13 +29,13 @@
 
             <div class="flex gap-4 text-sm text-muted mb-4" style="flex-wrap: wrap;">
                 <div class="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#60a5fa">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>Creado: {{ note.created_at|date:"j M, Y H:i" }}</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#60a5fa">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>Editado: {{ note.updated_at|date:"j M, Y H:i" }}</span>
@@ -46,7 +46,7 @@
                 <div class="flex items-center gap-2 flex-wrap">
                     <span class="text-sm">Etiquetas:</span>
                     {% for tag in note.tags.all %}
-                        <span class="badge">{{ tag.name }}</span>
+                        <span class="badge badge-blue glow-badge">{{ tag.name }}</span>
                     {% empty %}
                         <span class="text-sm text-muted">Ninguna</span>
                     {% endfor %}
@@ -63,14 +63,14 @@
         <div class="separator"></div>
 
         <div class="card-body">
-            <div class="flex gap-3">
-                <a href="{% url 'notes:note_update' pk=note.pk %}" class="btn btn-primary">
+            <div class="flex gap-3 flex-wrap">
+                <a href="{% url 'notes:note_update' pk=note.pk %}" class="btn btn-primary btn-animated">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                     Editar
                 </a>
-                <a href="{% url 'notes:note_delete' pk=note.pk %}" class="btn btn-danger">
+                <a href="{% url 'notes:note_delete' pk=note.pk %}" class="btn btn-danger btn-animated">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
@@ -80,4 +80,97 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* ===============================
+       Animaciones
+    =============================== */
+    /* Animación Fade */
+    .fade-in { 
+        animation: fadeIn 0.5s ease-in-out; 
+    }
+    @keyframes fadeIn { 
+        from { opacity: 0; } 
+        to { opacity: 1; } 
+    }
+
+    /* Card animado */
+    .card-animated {
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        border: 1px solid #60a5fa;
+        overflow: hidden;
+        animation: float 0.5s ease-in-out;
+    }
+    @keyframes float { 
+        from { transform: translateY(10px); opacity:0; } 
+        to { transform: translateY(0); opacity:1; } 
+    }
+
+    /* Botones con movimiento */
+    .hover-move:hover { 
+        transform: translateX(-4px); 
+        transition: 0.2s; 
+    }
+    .btn-animated { 
+        transition: transform 0.2s; 
+    }
+    .btn-animated:hover { 
+        transform: scale(1.05); 
+    }
+
+    /* ===============================
+       Header
+    =============================== */
+    .gradient-header {
+        background: linear-gradient(90deg, #93c5fd, #bfdbfe); /* Azul suave */
+        padding: 1rem 1.2rem;
+        color: #1e3a8a; /* Azul oscuro */
+    }
+    .gradient-header h1 {
+        color: #1e3a8a;
+        font-weight: 700;
+    }
+    .gradient-header .text-muted {
+        color: #1e3a8a; /* más visible */
+    }
+
+    /* ===============================
+       Glow y Badges
+    =============================== */
+    .glow-text { 
+        text-shadow: 0 0 8px rgba(255,255,255,0.4); 
+    }
+    .glow-badge { 
+        background: #f59e0b; /* Naranja */
+        color: white;
+        box-shadow: 0 0 8px rgba(245,158,11,0.5); 
+        padding: 0.25rem 0.5rem; 
+        border-radius: 8px; 
+        font-size: 0.75rem; 
+        font-weight: 500;
+    }
+
+    .badge { 
+        padding: 0.25rem 0.5rem; 
+        border-radius: 8px; 
+        font-size: 0.75rem; 
+        font-weight: 500; 
+    }
+    .badge-blue { 
+        background: #60a5fa; 
+        color: white; 
+        font-weight: 500;
+    }
+
+    /* ===============================
+       Separador
+    =============================== */
+    .separator { 
+        height: 1px; 
+        background: #e2e8f0; 
+        margin: 0.5rem 0; 
+    }
+</style>
+
 {% endblock content %}

@@ -27,6 +27,7 @@
                 {% endif %}
 
                 {% for fieldset in adminform %}
+<<<<<<< HEAD
                 <fieldset class="module aligned {{ fieldset.classes }}">
                         {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
                         {% if fieldset.description %}
@@ -48,12 +49,39 @@
                                 {% endif %}
 
                                 {% if field.field.help_text %}
+=======
+                  <fieldset class="module aligned {{ fieldset.classes }}">
+                        {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+                        {% if fieldset.description %}
+                          <div class="description">{{ fieldset.description|safe }}</div>
+                        {% endif %}
+                        {% for line in fieldset %}
+                          <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+                            {% for field in line %}
+                              <div{% if not line.show_label %} class="fieldBox"{% endif %}>
+                                {{ field.field.label_tag }}
+                                  {% if field.is_readonly %}
+                                    <p>{{ field.contents }}</p>
+                                  {% else %}
+                                    {{ field.field }}
+                                  {% endif %}
+
+                                  {% if field.errors %}
+                                    {{ field.errors }}
+                                  {% endif %}
+
+                                  {% if field.field.help_text %}
+>>>>>>> Lizeth
                                     <p class="help">{{ field.field.help_text|safe }}</p>
                                     {% endif %}
 
                                 </div>
                             {% endfor %}
+<<<<<<< HEAD
                         </div>
+=======
+                          </div>
+>>>>>>> Lizeth
                         {% endfor %}
                     </fieldset>
                 {% endfor %}

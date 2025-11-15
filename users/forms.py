@@ -13,10 +13,12 @@ class CustomSignupForm(SignupForm):
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
 
+
         user.nombre = self.cleaned_data['nombre']
         user.apellido = self.cleaned_data['apellido']
         user.save()
         return user
+
 
 class ProfileUpdateForm(forms.ModelForm):
     timezone = forms.ChoiceField(
@@ -29,10 +31,14 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['nombre', 'apellido', 'timezone', 'theme']
 
 
+
+
 class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
+        fields = ('email', 'nombre', 'apellido', 'role')
+        exclude = ('username',)
         fields = ('email', 'nombre', 'apellido', 'role')
         exclude = ('username',)
 class CustomUserChangeForm(UserChangeForm):

@@ -758,3 +758,12 @@ WARNING 2025-11-15 16:06:05,148 log Forbidden (CSRF cookie not set.): /admin/log
 WARNING 2025-11-15 16:07:23,173 log Forbidden (CSRF cookie not set.): /admin/login/
 WARNING 2025-11-15 16:07:44,323 log Forbidden (CSRF cookie not set.): /admin/login/
 WARNING 2025-11-15 16:08:10,619 log Forbidden (CSRF cookie not set.): /admin/login/
+INFO 2025-11-15 16:39:11,072 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 16:42:51,488 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 16:43:09,372 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 16:43:11,513 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 16:43:51,306 autoreload C:\Moony\Universidad\NoteSafe\users\forms.py changed, reloading.
+INFO 2025-11-15 16:43:53,969 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 16:44:26,897 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 16:45:02,147 autoreload C:\Moony\Universidad\NoteSafe\users\migrations\0004_alter_user_timezone.py changed, reloading.
+INFO 2025-11-15 16:45:04,692 autoreload Watching for file changes with StatReloader

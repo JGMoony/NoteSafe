@@ -128,19 +128,70 @@
 </div>
 
 <style>
-    .note-item-important {
-        border-color: #fbbf24;
-        background: #fffbeb;
-    }
-    [data-theme = 'oscuro']{
-        .note-item-important {
-            border-color: var(--warning);
-            background: #1f2937;
-        }
-    }
-    .card:hover {
-        box-shadow: var(--shadow-md);
-        transform: translateY(-2px);
-    }
+/* Notas importantes */
+.note-item-important {
+    border-color: #fbbf24;
+    background: #fffbeb; /* Amarillo suave para notas importantes */
+}
+
+/* Card de notas normales */
+.card {
+    border-radius: 12px;
+    border: 1px solid #60a5fa; /* Azul claro */
+    background: #eff6ff; /* Azul muy suave */
+    box-shadow: 0 4px 12px rgba(96,165,250,0.1); /* sombra ligera azulada */
+    transition: all 0.25s ease-in-out;
+    overflow: hidden;
+}
+
+/* Efecto hover */
+.card:hover {
+    box-shadow: 0 8px 20px rgba(96,165,250,0.2);
+    transform: translateY(-3px);
+}
+
+/* Card-header título */
+.card-header h3 a {
+    color: #1e3a8a; /* Azul oscuro */
+    text-decoration: none;
+}
+
+.card-header h3 a:hover {
+    text-decoration: underline;
+}
+
+/* Badges */
+.badge {
+    background: #60a5fa; /* Azul medio */
+    color: white;
+    font-weight: 500;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+/* Botones dentro de la card */
+.card-body .btn {
+    transition: transform 0.2s;
+}
+.card-body .btn:hover {
+    transform: scale(1.05);
+}
+
+/* Para temas oscuros */
+[data-theme='oscuro'] .card {
+    background: #1e293b;
+    border-color: #3b82f6;
+    color: #f1f5f9;
+}
+
+[data-theme='oscuro'] .card-header h3 a {
+    color: #f1f5f9;
+}
+
+[data-theme='oscuro'] .badge {
+    background: #3b82f6;
+}
 </style>
+
 {% endblock content %}
