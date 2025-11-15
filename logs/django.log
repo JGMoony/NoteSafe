@@ -1,0 +1,760 @@
+INFO 2025-11-13 16:02:19,088 autoreload Watching for file changes with StatReloader
+INFO 2025-11-13 16:03:46,881 autoreload C:\Moony\Universidad\Ingeniería de Software\Software II\2da vez\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-13 16:03:49,426 autoreload Watching for file changes with StatReloader
+INFO 2025-11-13 16:04:20,392 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-13 16:10:20,698 log Not Found: /favicon.ico
+INFO 2025-11-15 13:14:38,288 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 13:15:18,053 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 13:18:48,244 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 13:19:24,687 autoreload C:\Moony\Universidad\Ingeniería de Software\Software II\2da vez\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 13:19:29,018 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 13:23:35,630 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 13:24:51,401 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-15 13:25:46,387 log Not Found: /favicon.ico
+INFO 2025-11-15 13:32:13,293 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 14:48:26,305 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 14:51:16,166 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-15 14:52:05,000 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+WARNING 2025-11-15 14:52:05,521 log Not Found: /favicon.ico
+INFO 2025-11-15 14:52:38,213 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 14:52:42,026 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-15 14:53:07,289 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+INFO 2025-11-15 14:54:31,460 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 14:56:16,239 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:05:54,349 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:06:33,063 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:06:36,486 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:06:41,590 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\urls.py changed, reloading.
+INFO 2025-11-15 15:06:44,154 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:07:35,645 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:07:38,450 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:07:58,328 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:08:01,183 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:10:07,616 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:11:07,344 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-15 15:11:17,281 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+WARNING 2025-11-15 15:11:17,673 log Not Found: /favicon.ico
+INFO 2025-11-15 15:13:24,789 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:22:57,701 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-15 15:23:18,388 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:23:18,676 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:24:12,341 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:24:12,508 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:24:43,324 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:24:43,531 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:24:44,264 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:24:44,398 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:25:29,834 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:25:30,042 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+INFO 2025-11-15 15:26:08,988 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-15 15:26:15,832 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:26:16,099 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+INFO 2025-11-15 15:36:20,424 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:36:20,432 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:36:22,980 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:36:22,986 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:36:28,080 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:36:28,150 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:36:30,274 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:36:30,329 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:37:17,398 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:37:19,431 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:38:06,281 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:46:43,944 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:46:46,699 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:49:30,916 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+INFO 2025-11-15 15:49:33,530 autoreload Watching for file changes with StatReloader
+INFO 2025-11-15 15:49:47,001 autoreload C:\Moony\Universidad\NoteSafe\NoteSafe\settings.py changed, reloading.
+ERROR 2025-11-15 15:57:34,463 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:57:34,699 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:57:59,926 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:58:00,096 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:58:10,365 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:58:10,506 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:59:26,592 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:59:26,761 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:59:46,284 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 15:59:46,367 log Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.8:8000'. You may need to add '192.168.1.8' to ALLOWED_HOSTS.
+ERROR 2025-11-15 16:01:01,637 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+        response.render, thread_sensitive=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )()
+    ^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 502, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 556, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+WARNING 2025-11-15 16:01:01,930 log Not Found: /favicon.ico
+ERROR 2025-11-15 16:01:30,650 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+        response.render, thread_sensitive=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )()
+    ^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 502, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 556, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+ERROR 2025-11-15 16:02:30,545 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+        response.render, thread_sensitive=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )()
+    ^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 502, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 556, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+ERROR 2025-11-15 16:05:04,308 log Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 552, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+               ^^^^^^^^^^^^^^^^^^^^
+        response.render, thread_sensitive=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )()
+    ^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 502, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\asgiref\sync.py", line 556, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\django\template\library.py", line 321, in render
+    output = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\templatetags\socialaccount.py", line 21, in provider_login_url
+    provider = adapter.get_provider(request, provider)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 212, in get_provider
+    app = self.get_app(request, provider=provider, client_id=client_id)
+  File "C:\Users\lihan\AppData\Roaming\Python\Python314\site-packages\allauth\socialaccount\adapter.py", line 302, in get_app
+    raise SocialApp.DoesNotExist()
+allauth.socialaccount.models.SocialApp.DoesNotExist
+WARNING 2025-11-15 16:05:19,678 log Forbidden (CSRF cookie not set.): /admin/login/
+WARNING 2025-11-15 16:06:05,148 log Forbidden (CSRF cookie not set.): /admin/login/
+WARNING 2025-11-15 16:07:23,173 log Forbidden (CSRF cookie not set.): /admin/login/
+WARNING 2025-11-15 16:07:44,323 log Forbidden (CSRF cookie not set.): /admin/login/
+WARNING 2025-11-15 16:08:10,619 log Forbidden (CSRF cookie not set.): /admin/login/

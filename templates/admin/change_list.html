@@ -1,8 +1,8 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load i18n admin_urls static %}
 {% load custom_filters %}
 
-{% with search_var=cl.search_field|default:"q" %}
+{% with search_var='q' %}
 
 {% block content %}
 <div id="content-main">
@@ -20,45 +20,45 @@
             </ul>
         {% endblock %}
 
+        {# 1. BÚSQUEDA #}
+        {% if cl.search_fields %}
+        <div id="toolbar">
+            <form id="changelist-search" method="get" action="{% url opts|admin_urlname:'changelist' %}">
+                <div>
+                    {% for pair in cl.params.items %}
+                        {% if pair.0 != search_var %}
+                            <input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">
+                        {% endif %}
+                    {% endfor %}
+                    <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"></label>
+                    <input type="text" size="40" name="q" value="{{ cl.query }}" id="searchbar" autofocus>
+                    <input type="submit" value="{% translate 'Search' %}">
+
+                    {% if show_result_count %}
+                        <span class="small quiet">
+                        {% blocktranslate count counter=cl.result_count %}
+                        {{ counter }} result found
+                        {% plural %}
+                        {{ counter }} results found
+                        {% endblocktranslate %}
+                        </span>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
         <div class="changelist-form-container">
             <form id="changelist-form" method="post" {% if cl.formset and cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>
             {% csrf_token %}
-            
-            {# 1. BÚSQUEDA #}
-            {% if cl.search_fields %}
-            <div id="toolbar">
-                <form id="changelist-search" method="get">
-                    <div>
-                        {% for pair in cl.params.items %}
-                            {% if pair.0 != search_var %}
-                                <input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">
-                            {% endif %}
-                        {% endfor %}
-                        <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"></label>
-                        <input type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" autofocus>
-                        <input type="submit" value="{% translate 'Search' %}">
-                        
-                        {% if show_result_count %}
-                            <span class="small quiet">
-                            {% blocktranslate count counter=cl.result_count %}
-                            {{ counter }} result found
-                            {% plural %}
-                            {{ counter }} results found
-                            {% endblocktranslate %}
-                            </span>
-                        {% endif %}
-                    </div>
-                </form>
-            </div>
-            {% endif %}
 
             {# 2. TABLA DE RESULTADOS #}
             <div class="results">
-                <table id="result_list" class="full-width"> 
+                <table id="result_list" class="full-width">
                     <thead>
                         <tr>
-                            <th scope="col"><span></span></th> 
-                            <th scope="col"><span></span></th> 
+                            <th scope="col"><span></span></th>
+                            <th scope="col"><span></span></th>
                             <th scope="col"><span>Email</span></th>
                             <th scope="col"><span>Nombre</span></th>
                             <th scope="col"><span>Apellido</span></th>
@@ -69,12 +69,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for row_object in cl.queryset %} 
+                    {% for row_object in cl.result_list %}
                     <tr class="{% cycle 'row1' 'row2' %}">
-                        <td></td> 
-                        
+                        <td></td>
+
                         <td><a href="{% url opts|admin_urlname:'change' row_object.pk|admin_urlquote %}">{{ row_object|dict_get:cl.list_display.0 }}</a></td>
-                        
+
                         {% for field_name in cl.list_display|slice:"1:" %}
                             <td>{{ row_object|dict_get:field_name }}</td>
                         {% endfor %}
@@ -90,21 +90,21 @@
                     </tbody>
                 </table>
             </div>
-            
+
             {# 3. PAGINACIÓN #}
             {% if cl.paginator.num_pages > 1 %}
             <p class="paginator">
                 {% url opts|admin_urlname:'changelist' as cl_url %}
                 {% with current_url=cl_url|add:cl.get_query_string %}
-                
+
                 {% if cl.page_num != 1 %}
                     <a href="{{ current_url }}&p=1" class="first">{% translate '« First' %}</a>
                 {% endif %}
-                
+
                 {% if cl.page_num > 1 %}
-                    <a href="{{ current_url }}&p={{ cl.page_num|add:'-1' }}" class="prev">{% translate '‹ Previous' %}</a>
-                {% endif %} 
-                
+                    <a href="{{ current_url }}&p={{ cl.page_num|add:'-1' }}" class="prev">{% translate '< Previous' %}</a>
+                {% endif %}
+
                 {% for i in cl.page_range %}
                     {% if cl.page_num == i %}
                         <span class="this-page">{{ i }}</span>
@@ -114,21 +114,21 @@
                 {% endfor %}
 
                 {% if cl.page_num < cl.paginator.num_pages %}
-                    <a href="{{ current_url }}&p={{ cl.page_num|add:'1' }}" class="next">{% translate 'Next ›' %}</a>
+                    <a href="{{ current_url }}&p={{ cl.page_num|add:'1' }}" class="next">{% translate 'Next >' %}</a>
                 {% endif %}
-                
+
                 {% if cl.page_num != cl.paginator.num_pages %}
-                    <a href="{{ current_url }}&p={{ cl.paginator.num_pages }}" class="last">{% translate 'Last »' }}</a>
+                    <a href="{{ current_url }}&p={{ cl.paginator.num_pages }}" class="last">{% translate 'Last »' }</a>
                 {% endif %}
-                
+
                 {% blocktranslate with cl.paginator.num_pages as num_pages and cl.paginator.count as count %}
                     (Page {{ cl.page_num }} of {{ num_pages }}, Total {{ count }} items)
                 {% endblocktranslate %}
-                
+
                 {% endwith %}
             </p>
-            {% endif %}         
-            
+            {% endif %}
+
             </form>
         </div>
     </div>

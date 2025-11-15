@@ -12,12 +12,12 @@ class CustomSignupForm(SignupForm):
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
-        
+
         user.nombre = self.cleaned_data['nombre']
         user.apellido = self.cleaned_data['apellido']
         user.save()
         return user
-    
+
 class ProfileUpdateForm(forms.ModelForm):
     timezone = forms.ChoiceField(
         choices=[(tz, tz) for tz in pytz.common_timezones],
@@ -27,26 +27,14 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['nombre', 'apellido', 'timezone', 'theme']
-        
-        
+
+
 class CustomUserCreationForm(UserCreationForm):
-    
-    password2 = forms.CharField(label='Contraseña (confirmación)', widget=forms.PasswordInput)
-    
+
     class Meta:
         model = User
-        fields = ('email', 'nombre', 'apellido', 'role') 
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
-        
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
-        return user
-        
+        fields = ('email', 'nombre', 'apellido', 'role')
+        exclude = ('username',)
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
