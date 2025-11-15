@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url 
 
 load_dotenv()
 
@@ -15,12 +16,10 @@ if not SECRET_KEY:
     raise Exception("DJANGO_SECRET_KEY no está configurada en el entorno")
 
 # Control de debug
-DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
+DEBUG = os.getenv("DJANGO_DEBUG")
 
 # Hosts permitidos
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-
-IS_PRODUCTION = not DEBUG
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 AUTH_USER_MODEL = 'users.User'
 SITE_ID = 1
@@ -61,7 +60,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    # 'csp',
+    'csp',
     'notes',
     'users',
 ]
@@ -75,7 +74,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    # 'csp.middleware.CSPMiddleware',  # CSP
+    'csp.middleware.CSPMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'NoteSafe.urls'
@@ -104,8 +104,12 @@ WSGI_APPLICATION = 'NoteSafe.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -130,18 +134,20 @@ PASSWORD_HASHERS = [
 # Configuración de seguridad HTTPS
 # ==========================
 
-SECURE_SSL_REDIRECT = IS_PRODUCTION
-SECURE_HSTS_SECONDS = 31536000  # 1 año
+SECURE_SSL_REDIRECT = False if DEBUG else True
+SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SESSION_COOKIE_SECURE = IS_PRODUCTION
+SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SECURE = IS_PRODUCTION
+CSRF_COOKIE_SECURE = False if DEBUG else True
+CSRF_USE_SESSIONS = False if DEBUG else True
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = 'Strict'
+
 
 # ==========================
 # Content Security Policy (CSP)
@@ -217,3 +223,11 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+
+STATIC_URL = '/static/'
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
