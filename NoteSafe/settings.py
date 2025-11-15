@@ -238,3 +238,23 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+
+if not DEBUG:
+    from django.contrib.sites.models import Site
+    import os
+
+    RENDER_DOMAIN = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+
+    if RENDER_DOMAIN:
+        try:
+            site = Site.objects.get(pk=1)
+            if site.domain != RENDER_DOMAIN:
+                site.domain = RENDER_DOMAIN
+                site.name = "NoteSafe Render"
+                site.save()
+                print(f"Site 1: Dominio actualizado a {RENDER_DOMAIN}")
+        except Site.DoesNotExist:
+            Site.objects.create(pk=1, domain=RENDER_DOMAIN, name="NoteSafe Render")
+            print(f"Site 1: Creado con dominio {RENDER_DOMAIN}")
+            
