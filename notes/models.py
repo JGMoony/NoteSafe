@@ -24,7 +24,7 @@ class Note(models.Model):
         return self.title
 
 class AuditLog(models.Model): 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     action = models.CharField(max_length=100) 
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     extra = models.TextField(null=True, blank=True)
