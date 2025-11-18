@@ -934,3 +934,192 @@ a, button, .btn {
 .card, .note-item {
     transition: all 0.2s ease;
 }
+
+#content {
+    background: var(--background);
+    color: var(--foreground);
+    padding: 30px 25px;
+    font-family: inherit;
+    min-height: calc(100vh - 80px);
+
+h1, h2, h3, .breadcrumbs a {
+    color: var(--foreground);
+}
+.breadcrumbs {
+    background: var(--background) !important;
+    border: none !important;
+    padding: 0;
+    margin-bottom: 25px;
+    color: var(--muted-foreground);
+    font-size: 1.0em;
+}
+.breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+.breadcrumbs a:hover { text-decoration: underline; }
+
+.module {
+    background: var(--card) !important;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 25px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.module h2 {
+    color: var(--foreground);
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.form-row {
+    border-bottom: 1px solid var(--border);
+    padding: 15px 0;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.form-row:last-of-type { border-bottom: none; }
+
+.form-row label {
+    flex-basis: 180px; 
+    font-weight: 500;
+    color: var(--foreground);
+    padding-right: 20px;
+    margin-top: 8px;
+}
+
+.form-row input[type="text"], 
+.form-row input[type="email"], 
+.form-row input[type="password"], 
+.form-row select, 
+.form-row textarea {
+    width: 100%;
+    max-width: 350px; 
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    font-family: inherit;
+    background-color: var(--card);
+    color: var(--foreground);
+    flex-grow: 1;
+}
+
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2); 
+}
+
+.help, p.help {
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    margin-top: 5px;
+    flex-basis: 100%;
+    margin-left: 180px;
+}
+
+.submit-row {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--background-subtle);
+    border-radius: 0 0 var(--radius) var(--radius);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.submit-row input[type=submit], .submit-row a.deletelink {
+    display: inline-flex;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.submit-row .default {
+    background: var(--primary);
+    color: var(--color-on-primary);
+}
+.submit-row .default:hover {
+    background: var(--primary-hover);
+}
+
+.submit-row a.deletelink {
+    background: var(--destructive);
+    color: var(--color-on-destructive);
+}
+.submit-row a.deletelink:hover {
+    background: var(--destructive-hover);
+}
+
+.changelist table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.changelist thead th {
+    background: var(--background-subtle);
+    color: var(--foreground);
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.changelist tbody td {
+    background: var(--card);
+    color: var(--foreground);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+.changelist tbody tr:nth-child(even) td {
+    background: var(--background-subtle);
+}
+.changelist tbody tr:hover td {
+    background: var(--background-hover);
+}
+
+.changelist tbody td a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.delete-confirmation h2 {
+    color: var(--destructive);
+    font-size: 1.5em;
+    border-bottom: none;
+}
+.delete-confirmation p {
+    color: var(--muted-foreground);
+}
+.delete-confirmation ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 15px;
+    color: var(--foreground);
+}
+.delete-confirmation input[type=submit] {
+    background: var(--destructive);
+    color: var(--color-on-destructive);
+    padding: 10px 25px;
+    border-radius: var(--radius);
+}
+.delete-confirmation a {
+    color: var(--primary);
+}
+}
