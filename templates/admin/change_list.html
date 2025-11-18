@@ -6,21 +6,34 @@
 
 {% block extrastyle %}
 <style>
-    #content-main { max-width: 1400px; margin: 20px auto; padding: 0 20px; }
-    .module h1 { color: #fff; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 20px; }
+
+    #content-main { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+    .module h1 { display: none; } /* Ocultar el h1 duplicado si lo hay */
+
+    .breadcrumbs { 
+        color: #aaa; 
+        margin-bottom: 20px; 
+        font-size: 0.9em; 
+        padding: 10px 15px;
+        background-color: #1e1e1e;
+        border-radius: 6px;
+    }
+    .breadcrumbs a { color: #6c78e4; text-decoration: none; transition: color 0.2s; }
+    .breadcrumbs a:hover { color: #5560c9; }
 
     .object-tools { display: flex; list-style: none; padding: 0; margin-bottom: 20px; justify-content: flex-end; }
     .object-tools li { margin-left: 10px; }
     .addlink {
         background-color: #28a745; /* Verde */
         color: white !important;
-        padding: 8px 15px;
-        border-radius: 5px;
+        padding: 10px 20px;
+        border-radius: 6px;
         text-decoration: none !important;
         font-weight: 600;
         transition: background-color 0.2s;
         display: flex;
         align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     .addlink:hover { background-color: #218838; }
 
@@ -34,10 +47,10 @@
         background-color: #1e1e1e; 
         color: #fff; 
         width: 300px; 
+        max-width: 100%;
         transition: border-color 0.2s;
     }
     #searchbar:focus { border-color: #6c78e4; outline: none; }
-    #changelist-search label { display: none; }
     #changelist-search input[type="submit"] {
         background-color: #6c78e4; 
         color: white; 
@@ -48,7 +61,7 @@
         transition: background-color 0.2s;
     }
     #changelist-search input[type="submit"]:hover { background-color: #5560c9; }
-    .small.quiet { color: #aaa; margin-left: 15px; }
+    .small.quiet { color: #aaa; margin-left: 15px; font-style: italic; }
 
     .results table { 
         width: 100%; 
@@ -56,7 +69,7 @@
         background-color: #1e1e1e; 
         border-radius: 8px; 
         overflow: hidden; 
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
     .results th { 
         background-color: #2a2a2a; 
@@ -64,18 +77,21 @@
         padding: 12px 15px; 
         text-align: left; 
         font-weight: 600; 
-        border-bottom: 1px solid #444;
+        border-bottom: 2px solid #444;
     }
     .results td { 
         padding: 12px 15px; 
         border-bottom: 1px solid #333; 
         color: #ddd;
+        vertical-align: middle;
     }
     .results tr:last-child td { border-bottom: none; }
-    .results tr.row1:hover, .results tr.row2:hover { background-color: #222; }
+    .results tbody tr { transition: background-color 0.1s ease; }
+    .results tbody tr:hover { background-color: #252525; }
     .results tbody a { color: #6c78e4; text-decoration: none; transition: color 0.2s; }
     .results tbody a:hover { color: #5560c9; text-decoration: underline; }
 
+    input[type="checkbox"] { margin-right: 5px; transform: scale(1.2); }
     .action-column { 
         white-space: nowrap; 
         width: 1%;
@@ -85,10 +101,11 @@
         border-radius: 4px; 
         text-decoration: none !important; 
         margin-right: 5px;
-        font-size: 0.9em;
+        font-size: 0.85em;
         font-weight: 500;
         display: inline-flex;
         align-items: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
     .btn-ghost { 
         background-color: transparent; 
@@ -108,14 +125,24 @@
         background-color: #c82333; 
     }
 
-    .paginator { text-align: right; margin-top: 20px; font-size: 0.9em; color: #aaa; }
+    /* 3. Paginación */
+    .paginator { 
+        text-align: right; 
+        margin-top: 20px; 
+        font-size: 0.9em; 
+        color: #aaa;
+        padding: 10px 15px;
+        background-color: #2a2a2a;
+        border-radius: 6px;
+    }
     .paginator a, .paginator span {
-        padding: 5px 10px;
+        padding: 6px 10px;
         margin: 0 2px;
         border-radius: 4px;
         text-decoration: none;
         color: #6c78e4;
         transition: background-color 0.2s;
+        font-weight: 500;
     }
     .paginator a:hover { background-color: #333; }
     .paginator .this-page { 
@@ -129,6 +156,12 @@
 {% block content %}
 <div id="content-main">
     <div class="module" id="changelist">
+        
+        {% url opts|admin_urlname:'changelist' as changelist_url %}
+        <p class="breadcrumbs">
+            <i class="fas fa-home"></i> <a href="{% url 'users:admin_home' %}">{% translate 'Home' %}</a> &rsaquo;
+            {% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Gestión de {{ verbose_name_plural }}{% endblocktranslate %}
+        </p>
 
         {# 0. BOTÓN AÑADIR #}
         {% block object-tools %}
@@ -136,8 +169,8 @@
                 <li>
                     {% url opts|admin_urlname:'add' as add_url %}
                     <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
-                        <i class="fas fa-plus-circle" style="margin-right: 5px;"></i>
-                        {% blocktranslate with opts.verbose_name as name %}Add {{ name }}{% endblocktranslate %}
+                        <i class="fas fa-plus-circle" style="margin-right: 8px;"></i>
+                        {% blocktranslate with opts.verbose_name as name %}Añadir {{ name }}{% endblocktranslate %}
                     </a>
                 </li>
             </ul>
@@ -153,16 +186,15 @@
                             <input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">
                         {% endif %}
                     {% endfor %}
-                    {# <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"></label> Ocultamos el viejo icono #}
-                    <input type="text" size="40" name="q" value="{{ cl.query }}" id="searchbar" placeholder="{% translate 'Search' %}..." autofocus>
+                    <input type="text" size="40" name="q" value="{{ cl.query }}" id="searchbar" placeholder="Buscar por email, nombre, apellido..." autofocus>
                     <input type="submit" value="{% translate 'Search' %}">
 
                     {% if show_result_count %}
                     <span class="small quiet">
                     {% blocktranslate count counter=cl.result_count %}
-                    {{ counter }} result found
+                    {{ counter }} resultado
                     {% plural %}
-                    {{ counter }} results found
+                    {{ counter }} resultados
                     {% endblocktranslate %}
                     </span>
                     {% endif %}
@@ -180,7 +212,8 @@
                 <table id="result_list" class="full-width">
                     <thead>
                         <tr>
-                            <th scope="col" style="width: 1%;"><span></span></th> <th scope="col" style="width: 1%;"><span>ID</span></th> <th scope="col"><span>Email</span></th>
+                            <th scope="col" style="width: 20px;"><span></span></th> <th scope="col" style="width: 50px;"><span>ID</span></th>
+                            <th scope="col"><span>Email</span></th>
                             <th scope="col"><span>Nombre</span></th>
                             <th scope="col"><span>Apellido</span></th>
                             <th scope="col"><span>Role</span></th>
@@ -193,10 +226,11 @@
                     {% for row_object in cl.result_list %}
                     <tr class="{% cycle 'row1' 'row2' %}">
                         <td><input type="checkbox" name="_selected_action" value="{{ row_object.pk|admin_urlquote }}"></td>
+                        <td>{{ row_object.pk }}</td> 
 
-                        <td>{{ row_object.pk }}</td> {% for field_name in cl.list_display|slice:":8" %}
+                        {% for field_name in cl.list_display %}
                             <td>
-                                {% if forloop.counter == 1 %}
+                                {% if forloop.first %}
                                     <a href="{% url opts|admin_urlname:'change' row_object.pk|admin_urlquote %}">{{ row_object|dict_get:field_name }}</a>
                                 {% else %}
                                     {{ row_object|dict_get:field_name }}
@@ -206,15 +240,15 @@
 
                         <td class="action-column">
                             <a href="{% url opts|admin_urlname:'change' row_object.pk|admin_urlquote %}" class="btn btn-sm btn-ghost">
-                                <i class="fas fa-edit" style="margin-right: 5px;"></i> Editar
+                                <i class="fas fa-edit"></i>
                             </a>
                             <a href="{% url opts|admin_urlname:'delete' row_object.pk|admin_urlquote %}" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash-alt" style="margin-right: 5px;"></i> Eliminar
+                                <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
                     </tr>
                     {% empty %}
-                    <tr><td colspan="10" style="text-align: center;">{% translate "No items available" %}</td></tr>
+                    <tr><td colspan="9" style="text-align: center; padding: 30px; font-style: italic;">{% translate "No hay usuarios disponibles." %}</td></tr>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -251,7 +285,7 @@
                 {% endif %}
 
                 {% blocktranslate with cl.paginator.num_pages as num_pages and cl.paginator.count as count %}
-                    (Page {{ cl.page_num }} of {{ num_pages }}, Total {{ count }} items)
+                    (Página {{ cl.page_num }} de {{ num_pages }}, Total {{ count }} elementos)
                 {% endblocktranslate %}
 
                 {% endwith %}

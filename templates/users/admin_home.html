@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{% translate "Panel de Administración" %}{% endblock %}
+{% block head_title %}Panel Principal | NoteSafe{% endblock %}
+
 {% block extrastyle %}
 <style>
     .welcome-dashboard {
         max-width: 1200px;
-        margin: 20px auto;
-        padding: 20px;
+        margin: 40px auto;
+        padding: 0 25px;
+        color: #f0f0f0;
     }
     .welcome-dashboard h1 {
-        color: #f0f0f0;
+        color: #fff;
+        font-weight: 700;
         margin-bottom: 0.25em;
+        font-size: 3em;
     }
 
     .welcome-dashboard .description {
@@ -22,32 +26,40 @@
 
     .welcome-dashboard hr {
         border-top: 1px solid #333;
-        margin-bottom: 25px;
+        margin: 30px 0;
+    }
+
+    .welcome-dashboard h2 {
+        color: #6c78e4;
+        font-size: 1.6em;
+        margin-bottom: 20px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
     .card-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-        gap: 20px; 
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+        gap: 30px;
         margin-top: 20px;
     }
 
     .dashboard-card {
-        background-color: #2a2a2a; 
-        border-radius: 8px;
-        padding: 20px;
+        background-color: #2a2a2a;
+        border-radius: 12px;
+        padding: 30px;
         text-decoration: none; 
         color: inherit;
         display: flex; 
-        align-items: flex-start;
+        align-items: center;
         border: 1px solid #3a3a3a;
-        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-        font-family: sans-serif;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
     }
 
     .dashboard-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        background-color: #2e2e2e;
         border-color: #6c78e4;
     }
 
@@ -55,28 +67,30 @@
         margin-top: 0;
         margin-bottom: 5px;
         color: #fff; 
-        font-size: 1.25em;
+        font-size: 1.4em;
+        font-weight: 700;
     }
 
     .dashboard-card p {
         color: #a0a0a0; 
-        font-size: 0.9em;
+        font-size: 0.95em;
+        margin-bottom: 0;
     }
 
     .dashboard-card .icon-wrapper {
         flex-shrink: 0; 
-        margin-right: 15px;
-        padding-top: 5px;
+        margin-right: 20px;
     }
 
     .dashboard-card .icon-wrapper i {
-        font-size: 2.5em;
+        font-size: 3em;
         color: #6c78e4;
     }
+    
+    .dashboard-card.primary-card .icon-wrapper i { color: #28a745; } /* Verde para Dashboard */
+    .dashboard-card:nth-child(2) .icon-wrapper i { color: #007bff; } /* Azul para Usuarios */
+    .dashboard-card:nth-child(3) .icon-wrapper i { color: #ffc107; } /* Amarillo para Auditoría */
 
-    .primary-card .icon-wrapper i {
-        color: #28a745;
-    }
 </style>
 {% endblock %}
 
@@ -89,14 +103,14 @@
         
         <hr>
 
-        <h2>{% translate "Funciones y Accesos Rápidos" %}</h2>
+        <h2><i class="fas fa-bolt" style="margin-right: 10px; color: #6c78e4;"></i>{% translate "Funciones y Accesos Rápidos" %}</h2>
     </div>
 
     <div class="card-grid">
         
         <a href="{% url 'users:admin_dashboard' %}" class="dashboard-card primary-card">
             <div class="icon-wrapper">
-                <i class="fas fa-tachometer-alt"></i> </div>
+                <i class="fas fa-chart-line"></i> </div>
             <div class="card-content">
                 <h3>{% translate "Panel de Supervisión" %}</h3>
                 <p>{% translate "Vista general del estado actual del sistema y estadísticas clave." %}</p>

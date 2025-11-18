@@ -1,133 +1,176 @@
 {% extends "base.html" %}
 {% load i18n humanize %}
 
-{% block head_title %}Panel de Administración | NoteSafe{% endblock %}
+{% block head_title %}Dashboard | NoteSafe{% endblock %}
 
 {% block extrastyle %}
 <style>
-    /* ------------------- Estilos de Dashboard ------------------- */
     .dashboard-container {
-        padding: 20px;
+        padding: 25px;
         max-width: 1300px;
-        margin: 20px auto;
+        margin: 40px auto;
         color: #f0f0f0;
     }
 
-    /* Encabezado */
     .page-header h1 {
         color: #fff;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 5px;
-        font-size: 2.5em;
+        font-size: 3em;
+        display: flex;
+        align-items: center;
+    }
+    .page-header h1 i {
+        color: #28a745;
+        margin-right: 15px;
     }
     .page-header .text-muted {
         color: #b0b0b0 !important;
         font-size: 1.1em;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
     }
 
-    /* Rejilla de Columnas */
     .grid-3-cols, .grid-2-cols {
         display: grid;
-        gap: 20px;
+        gap: 25px;
     }
     .grid-3-cols {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
     .grid-2-cols {
-        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        grid-template-columns: 2fr 1fr;
+        margin-top: 30px;
     }
 
-    /* Tarjetas Modulares (Módulos de Reporte) */
-    .card-module {
-        background-color: #2a2a2a;
-        border-radius: 8px;
-        padding: 25px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        border: 1px solid #3a3a3a;
-    }
-
-    /* --- Tarjetas de Estadística (KPIs) --- */
     .card-stat {
-        background-color: #1e1e1e; /* Fondo oscuro para el stat */
-        border-left: 5px solid var(--accent-color, #6c78e4);
+        background-color: #1e1e1e;
+        border-radius: 10px;
         padding: 25px;
-        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 120px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        min-height: 140px;
+        position: relative;
+        overflow: hidden;
     }
+    .card-stat::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background-color: var(--accent-color, #6c78e4);
+    }
+    
+    .stat-users::before { background-color: #007bff; } /* Azul */
+    .stat-notes::before { background-color: #28a745; } /* Verde */
+    .stat-projection::before { background-color: #ffc107; } /* Amarillo */
+
+    .stat-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .stat-value {
-        font-size: 2.5em;
-        font-weight: 700;
+        font-size: 3em;
+        font-weight: 800;
         color: #fff;
         margin: 0;
+        line-height: 1;
     }
     .stat-label {
         color: #a0a0a0;
-        font-size: 0.95em;
+        font-size: 1em;
         margin-bottom: 0;
-    }
-    .stat-detail {
-        margin-top: 10px;
-        color: #707070;
-        font-size: 0.8em;
+        font-weight: 500;
+        margin-top: 5px;
     }
     .stat-icon {
-        float: right;
-        font-size: 2.2em;
-        color: #6c78e4;
+        font-size: 3em;
+        opacity: 0.6;
     }
-    /* Colores específicos para STATS */
-    .stat-users { border-left-color: #007bff; }
-    .stat-notes { border-left-color: #28a745; }
-    .stat-projection { border-left-color: #ffc107; }
+    .stat-users .stat-icon { color: #007bff; }
+    .stat-notes .stat-icon { color: #28a745; }
+    .stat-projection .stat-icon { color: #ffc107; }
 
-    /* --- Módulo de Lista (Usuarios Activos) --- */
+    .stat-detail {
+        margin-top: 15px;
+        color: #707070;
+        font-size: 0.9em;
+        padding-top: 10px;
+        border-top: 1px solid #333;
+    }
+    
+    .card-module {
+        background-color: #2a2a2a;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 1px solid #3a3a3a;
+    }
+    .card-module h2 {
+        color: #fff;
+        font-size: 1.8em;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
     .list-group {
         padding: 0;
         margin: 0;
+        list-style: none;
     }
     .list-group-item {
         background-color: #333;
         border: 1px solid #444;
         color: #f0f0f0;
-        margin-bottom: 5px;
-        border-radius: 4px;
-        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        padding: 12px 18px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: background-color 0.2s;
     }
-    .list-group-item strong {
-        color: #fff;
-    }
+    .list-group-item:hover { background-color: #3a3a3a; }
+    .list-group-item strong { color: #fff; }
+    .list-group-item span { color: #ccc; font-size: 0.9em; }
+
     .badge-secondary {
         background-color: #6c78e4;
         color: #fff;
-        padding: 4px 8px;
-        border-radius: 12px;
+        padding: 6px 10px;
+        border-radius: 15px;
         font-size: 0.85em;
+        font-weight: 600;
     }
 
-    /* --- Botones de Gestión --- */
     .button-group {
-        margin-top: 15px;
+        margin-top: 25px;
     }
     .btn-action {
         background-color: #6c78e4;
         color: #fff;
-        padding: 10px 20px;
-        border-radius: 5px;
+        padding: 12px 25px;
+        border-radius: 8px;
         text-decoration: none;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
         transition: background-color 0.2s;
         border: none;
+        font-size: 1em;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
     .btn-action:hover {
         background-color: #5560c9;
+    }
+    .btn-action i {
+        margin-right: 8px;
+        font-size: 1.1em;
     }
 </style>
 {% endblock %}
@@ -135,33 +178,42 @@
 {% block content %}
 <div class="dashboard-container">
     <div class="page-header">
-        <h1>Panel de Administración</h1>
+        <h1><i class="fas fa-tachometer-alt"></i> Panel de Administración</h1>
         <p class="text-muted">Vista centralizada para supervisar la seguridad y actividad del sistema.</p>
     </div>
 
-    <div class="grid-3-cols mt-4">
+    <div class="grid-3-cols">
         
         <div class="card-stat stat-users">
-            <div>
+            <div class="stat-content">
+                <div>
+                    <h2 class="stat-value">{{ total_users|intcomma }}</h2>
+                    <p class="stat-label">Usuarios Registrados</p>
+                </div>
                 <i class="fas fa-users stat-icon"></i>
-                <h2 class="stat-value">{{ total_users|intcomma }}</h2>
             </div>
-            <p class="stat-label">Usuarios Registrados</p>
+            <p class="stat-detail">Cuentas activas en la plataforma.</p>
         </div>
         
         <div class="card-stat stat-notes">
-            <div>
+            <div class="stat-content">
+                <div>
+                    <h2 class="stat-value">{{ total_notes|intcomma }}</h2>
+                    <p class="stat-label">Notas Totales Creadas</p>
+                </div>
                 <i class="fas fa-file-alt stat-icon"></i>
-                <h2 class="stat-value">{{ total_notes|intcomma }}</h2>
             </div>
-            <p class="stat-label">Notas Totales Creadas</p>
+            <p class="stat-detail">Cantidad total de notas protegidas.</p>
         </div>
         
         <div class="card-stat stat-projection">
-            <div>
+            <div class="stat-content">
+                <div>
+                    <h2 class="stat-value">99%</h2> 
+                    <p class="stat-label">Tasa de Proyección</p>
+                </div>
                 <i class="fas fa-shield-alt stat-icon"></i>
-                <h2 class="stat-value">{{ total_notes|floatformat:0 }}%</h2> </div>
-            <p class="stat-label">Tasa de Proyección</p>
+            </div>
             <small class="stat-detail">Monitoreo de uso y prevención de ataques.</small>
         </div>
     </div>
@@ -171,34 +223,35 @@
     <div class="grid-2-cols">
 
         <div class="card-module">
-            <h2>Usuarios Más Activos </h2>
+            <h2><i class="fas fa-fire" style="margin-right: 10px; color: #ffc107;"></i> Usuarios Más Activos </h2>
             <p class="text-muted">Top 5 usuarios con mayor actividad de creación de notas.</p>
             <ul class="list-group">
                 {% for user in active_users %}
                 <li class="list-group-item">
                     <div>
-                        {{ forloop.counter }}. <strong>{{ user.nombre }}</strong> <span style="color: #ccc;">({{ user.email }})</span>
+                        {{ forloop.counter }}. <strong>{{ user.nombre|capfirst }}</strong> <span>({{ user.email }})</span>
                     </div>
                     <span class="badge badge-secondary">{{ user.note_count }} notas</span>
                 </li>
                 {% empty %}
-                <li class="list-group-item">Aún no hay suficiente actividad para mostrar un ranking.</li>
+                <li class="list-group-item" style="justify-content: center; opacity: 0.8;">
+                    <i class="fas fa-info-circle" style="margin-right: 8px;"></i> Aún no hay suficiente actividad para mostrar un ranking.
+                </li>
                 {% endfor %}
             </ul>
         </div>
         
         <div class="card-module">
-            <h2>Acciones de Gestión Rápida </h2>
+            <h2><i class="fas fa-tools" style="margin-right: 10px; color: #6c78e4;"></i> Acciones de Gestión Rápida </h2>
             <p class="text-muted">Enlaces directos a las áreas clave de administración.</p>
-            <div class="button-group">
+            <div class="button-group" style="display: flex; flex-direction: column; gap: 15px;">
                 <a href="{% url 'admin:users_user_changelist' %}" class="btn-action">
-                    <i class="fas fa-users-cog"></i> Gestión de Cuentas
+                    <i class="fas fa-users-cog"></i> Gestión de Cuentas de Usuario
+                </a>
+                <a href="{% url 'notes:audit_log' %}" class="btn-action" style="background-color: #ffc107; color: #333;">
+                    <i class="fas fa-eye"></i> Revisar Log de Auditoría
                 </a>
             </div>
-
-            <h2 style="margin-top: 40px;">Registro de Eventos Recientes</h2>
-            <p class="text-muted">Información sobre los últimos accesos o cambios críticos (Requiere implementación de Logs).</p>
-            <p style="color: #ffc107;">[Mostrar eventos recientes aquí...]</p>
         </div>
 
     </div>

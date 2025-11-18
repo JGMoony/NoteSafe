@@ -3,87 +3,82 @@
 
 {% block extrastyle %}
 <style>
-    #content-main { max-width: 900px; 
-      margin: 20px auto; 
-      padding: 0 20px; 
-    }
-
+    #content-main { max-width: 900px; margin: 30px auto; padding: 0 20px; }
     .module { 
-      background-color: #1e1e1e; 
-      padding: 30px; 
-      border-radius: 8px; 
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); 
+        background-color: #1e1e1e; 
+        padding: 30px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); 
     }
-
     .module h1 { 
-      color: #fff; 
-      border-bottom: 1px solid #444; 
-      padding-bottom: 10px; 
-      margin-bottom: 20px; 
-      font-size: 1.8em; 
+        color: #fff; 
+        border-bottom: 1px solid #444; 
+        padding-bottom: 10px; 
+        margin-bottom: 20px; 
+        font-size: 2em;
+        display: flex;
+        align-items: center;
     }
+    .module h1 i { color: #28a745; margin-right: 15px; }
 
-    .breadcrumbs { 
-      color: #aaa; 
-      margin-bottom: 20px; 
-      font-size: 0.9em; 
-    }
+    .breadcrumbs { color: #aaa; margin-bottom: 20px; font-size: 0.9em; }
+    .breadcrumbs a { color: #6c78e4; text-decoration: none; }
 
-    .breadcrumbs a { 
-      color: #6c78e4; 
-      text-decoration: none; 
+    .errornote, ul.errorlist { 
+        background-color: #551c1c; 
+        color: #ffcccc; 
+        border: 1px solid #dc3545; 
+        padding: 10px; 
+        border-radius: 4px; 
+        margin-bottom: 15px;
+        font-weight: 500;
     }
 
     fieldset { 
-      border: 1px solid #333; 
-      padding: 20px; 
-      margin-bottom: 25px; 
-      border-radius: 6px; 
-      background-color: #2a2a2a; 
+        border: 1px solid #333; 
+        padding: 20px; 
+        margin-bottom: 25px; 
+        border-radius: 6px; 
+        background-color: #2a2a2a; 
     }
-
     fieldset h2 { 
-      color: #fff; 
-      border-bottom: 1px solid #444;
-      padding-bottom: 8px; 
-      margin: -10px 0 15px 0; 
-      font-size: 1.4em; 
+        color: #fff; 
+        border-bottom: 1px solid #444; 
+        padding-bottom: 8px; 
+        margin: -10px 0 15px 0; 
+        font-size: 1.4em; 
+        font-weight: 600;
     }
-
-    fieldset .description { 
-      color: #b0b0b0; 
-      margin-bottom: 15px; 
-      font-style: italic; 
-    }
+    fieldset .description { color: #b0b0b0; margin-bottom: 15px; font-style: italic; font-size: 0.9em; }
     
     .form-row { 
-      margin-bottom: 15px; 
-      padding: 10px 0; 
-      border-bottom: 1px dashed #333; 
-      display: flex; 
-      flex-wrap: wrap; 
+        margin-bottom: 15px; 
+        padding: 10px 0; 
+        border-bottom: 1px dashed #333; 
+        display: flex; 
+        align-items: flex-start;
     }
-
-    .form-row:last-child { 
-      border-bottom: none; 
-    }
-
+    .form-row:last-of-type { border-bottom: none; }
+    .form-row.errors { background-color: rgba(220, 53, 69, 0.1); border: 1px solid #dc3545; padding: 10px; border-radius: 4px; }
+    
     .form-row label { 
         color: #fff; 
         font-weight: 600; 
         display: block; 
-        margin-bottom: 5px;
         width: 180px;
         padding-top: 8px;
+        min-height: 20px;
     }
+    
+    .fieldBox { width: calc(100% - 180px); }
     
     input[type="text"], input[type="email"], input[type="password"], select, textarea {
         background-color: #1e1e1e;
         border: 1px solid #444;
         color: #fff;
-        padding: 8px 12px;
+        padding: 10px 12px;
         border-radius: 4px;
-        width: calc(100% - 190px);
+        width: 100%;
         box-sizing: border-box;
         transition: border-color 0.2s;
     }
@@ -92,35 +87,30 @@
         outline: none;
     }
 
-    .help, .helptext { color: #888; font-size: 0.9em; margin-top: 5px; }
-    .errornote, ul.errorlist { 
-        background-color: #551c1c; 
-        color: #ffcccc; 
-        border: 1px solid #dc3545; 
-        padding: 10px; 
-        border-radius: 4px; 
-        margin-bottom: 15px;
-    }
+    .help, .helptext { color: #888; font-size: 0.9em; margin-top: 5px; display: block; }
+    .form-row p { color: #ccc; padding-top: 8px; }
 
     .submit-row { 
         background-color: #2a2a2a; 
-        padding: 15px 20px; 
+        padding: 15px 30px; 
         border-radius: 0 0 8px 8px; 
-        margin: 30px -30px -30px -30px;
+        margin: 30px -30px -30px -30px; 
         text-align: right;
         border-top: 1px solid #333;
     }
     .submit-row input[type="submit"] {
-        padding: 10px 20px;
+        padding: 10px 25px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-weight: 600;
         transition: background-color 0.2s;
+        font-size: 1em;
     }
     .submit-row .default { 
         background-color: #28a745; 
         color: white; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     .submit-row .default:hover { 
         background-color: #218838; 
@@ -132,22 +122,23 @@
 <div id="content-main">
     <div class="module" id="add-user-form">
 
-        <h1><i class="fas fa-user-plus" style="margin-right: 10px; color: #28a745;"></i>{% translate "Añadir usuario" %}</h1>
+        <h1><i class="fas fa-user-plus"></i>{% translate "Añadir usuario" %}</h1>
 
         {% url opts|admin_urlname:'changelist' as changelist_url %}
         <p class="breadcrumbs">
-            <a href="{% url 'users:admin_home' %}">{% translate 'Home' %}</a> &rsaquo;
-            <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Select {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
-            {% translate 'Add' %}
+            <i class="fas fa-home"></i> <a href="{% url 'users:admin_home' %}">{% translate 'Home' %}</a> &rsaquo;
+            <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Gestión de {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
+            {% translate 'Añadir' %}
         </p>
 
         <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{% url opts|admin_urlname:'add' %}" method="post" id="{{ opts.model_name }}_form" novalidate>
             {% csrf_token %}
-
             <div>
+
                 {% if errors %}
                     <p class="errornote">
-                        {% if errors|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
+                        <i class="fas fa-times-circle" style="margin-right: 5px;"></i>
+                        {% if errors|length == 1 %}{% translate "Por favor, corrija el error a continuación." %}{% else %}{% translate "Por favor, corrija los errores a continuación." %}{% endif %}
                     </p>
                     {{ adminform.form.non_field_errors }}
                 {% endif %}
@@ -161,10 +152,10 @@
                         {% for line in fieldset %}
                           <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
                             {% for field in line %}
-                              <div{% if not line.show_label %} class="fieldBox"{% endif %} style="display: flex; align-items: flex-start; width: 100%;">
+                              <div{% if not line.show_label %} class="fieldBox"{% endif %}>
                                 {{ field.field.label_tag }}
                                   {% if field.is_readonly %}
-                                    <p style="color: #ccc; padding-top: 8px;">{{ field.contents }}</p>
+                                    <p>{{ field.contents }}</p>
                                   {% else %}
                                     {{ field.field }}
                                   {% endif %}
@@ -174,7 +165,7 @@
                                   {% endif %}
 
                                   {% if field.field.help_text %}
-                                    <p class="help" style="width: 100%; margin-left: 190px;">{{ field.field.help_text|safe }}</p>
+                                    <p class="help">{{ field.field.help_text|safe }}</p>
                                     {% endif %}
                                 </div>
                             {% endfor %}
@@ -184,7 +175,7 @@
                 {% endfor %}
 
                 <div class="submit-row">
-                    <input type="submit" value="{% translate 'Save' %}" class="default" name="_save">
+                    <input type="submit" value="{% translate 'Grabar' %}" class="default" name="_save">
                 </div>
 
             </div>

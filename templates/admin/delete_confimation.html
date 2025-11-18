@@ -3,43 +3,32 @@
 
 {% block extrastyle %}
 <style>
-    #content-main { 
-        max-width: 600px; 
-        margin: 50px auto; 
-        padding: 0 20px; 
-    }
-
+    #content-main { max-width: 650px; margin: 50px auto; padding: 0 20px; }
     .module { 
         background-color: #1e1e1e; 
         padding: 30px; 
         border-radius: 8px; 
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        border: 2px solid #dc3545;
+        border: 2px solid #dc3545; /* Borde rojo de advertencia */
+        text-align: center;
     }
     .module h1 { 
-        color: #dc3545;
+        color: #dc3545; /* Rojo de advertencia */
         border-bottom: 1px solid #444; 
         padding-bottom: 10px; 
         margin-bottom: 20px; 
-        font-size: 1.8em; 
+        font-size: 2em; 
         display: flex;
         align-items: center;
+        justify-content: center;
     }
+    .module h1 i { margin-right: 15px; font-size: 1.2em; }
 
-    .module h1 i { 
-        margin-right: 10px; 
-    }
+    .breadcrumbs { color: #aaa; margin-bottom: 20px; font-size: 0.9em; text-align: left; }
+    .breadcrumbs a { color: #6c78e4; text-decoration: none; }
 
-    .breadcrumbs { 
-        color: #aaa; 
-        margin-bottom: 20px; 
-        font-size: 0.9em; 
-    }
-
-    .breadcrumbs a { 
-        color: #6c78e4; 
-        text-decoration: none; 
-    }
+    .module p { color: #ddd; line-height: 1.6; margin-bottom: 15px; text-align: left; }
+    .module strong { color: #fff; }
 
     .errornote { 
         background-color: #551c1c; 
@@ -49,33 +38,41 @@
         border-radius: 4px; 
         margin-bottom: 20px;
         font-weight: 600;
+        text-align: left;
     }
 
     .deleted, ul { 
         list-style: none; 
-        padding: 10px 20px; 
+        padding: 15px 20px; 
         background-color: #2a2a2a; 
         border: 1px solid #444; 
         border-radius: 4px; 
         margin-top: 15px;
+        text-align: left;
     }
-    .deleted li, ul li { color: #ccc; margin-bottom: 5px; }
+    .deleted li, ul li { 
+        color: #ccc; 
+        margin-bottom: 8px; 
+        display: flex;
+        align-items: center;
+    }
+    .deleted li i { color: #dc3545; margin-right: 10px; }
 
-    .module p { color: #ddd; line-height: 1.5; }
-
-    form div { text-align: right; margin-top: 25px; }
+    form div { text-align: center; margin-top: 25px; }
     
     input[type="submit"], .button {
-        padding: 10px 20px;
+        padding: 12px 25px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-weight: 600;
         transition: background-color 0.2s;
-        margin-left: 10px;
+        margin: 0 10px;
         text-decoration: none;
-        display: inline-block;
-        line-height: normal;
+        display: inline-flex;
+        align-items: center;
+        font-size: 1em;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     input[type="submit"] {
@@ -104,35 +101,38 @@
         
         {% url opts|admin_urlname:'changelist' as changelist_url %}
         <p class="breadcrumbs">
-            <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a> &rsaquo;
-            <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Select {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
-            {% blocktranslate with obj=object %}Delete {{ obj }}{% endblocktranslate %}
+            <i class="fas fa-home"></i> <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a> &rsaquo;
+            <a href="{{ changelist_url }}">{% blocktranslate with verbose_name_plural=opts.verbose_name_plural %}Gestión de {{ verbose_name_plural }}{% endblocktranslate %}</a> &rsaquo;
+            {% blocktranslate with obj=object %}Eliminar {{ obj }}{% endblocktranslate %}
         </p>
 
         {% if perms_lacking %}
             <p class="errornote">
             {% if perms_needed %}
+                <i class="fas fa-lock" style="margin-right: 5px;"></i>
                 {% blocktranslate %}Deleting the selected object requires permissions which you don't have.{% endblocktranslate %}
             {% else %}
+                <i class="fas fa-lock" style="margin-right: 5px;"></i>
                 {% blocktranslate %}You don't have permissions to delete this object.{% endblocktranslate %}
             {% endif %}
             </p>
         {% elif protected %}
             <p class="errornote">
+            <i class="fas fa-shield-alt" style="margin-right: 5px;"></i>
             {% blocktranslate %}Deleting the selected object would require deleting the following related objects, but one or more of them are protected and can't be deleted.{% endblocktranslate %}
             </p>
             <ul>
             {% for obj in protected %}
-                <li><i class="fas fa-lock" style="margin-right: 5px;"></i>{{ obj }}</li>
+                <li><i class="fas fa-ban" style="margin-right: 10px;"></i>{{ obj }}</li>
             {% endfor %}
             </ul>
         {% else %}
-            <p>{% blocktranslate %}¿Está seguro que desea eliminar el objeto **"{{ object }}"**? Todos los siguientes elementos relacionados serán eliminados permanentemente:{% endblocktranslate %}</p>
+            <p>{% blocktranslate %}¿Está seguro que desea eliminar el objeto **"{{ object }}"**? **¡Esta acción es irreversible!** Todos los siguientes elementos relacionados serán eliminados permanentemente:{% endblocktranslate %}</p>
             
             {% if deleted_objects %}
                 <ul class="deleted">
                 {% for deleted_object in deleted_objects %}
-                    <li><i class="fas fa-times-circle" style="color: #dc3545; margin-right: 5px;"></i>{{ deleted_object }}</li>
+                    <li><i class="fas fa-minus-circle"></i>{{ deleted_object }}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
@@ -140,9 +140,9 @@
             <form action="" method="post">{% csrf_token %}
                 <div>
                     <input type="hidden" name="post" value="yes">
-                    <input type="submit" value="{% translate 'Yes, I’m sure' %}">
+                    <input type="submit" value="{% translate 'Sí, estoy seguro' %}">
                     {% url opts|admin_urlname:'change' object.pk|admin_urlquote as cancel_url %}
-                    <a href="{{ cancel_url }}" class="button cancel-link">{% translate 'No, take me back' %}</a>
+                    <a href="{{ cancel_url }}" class="button cancel-link">{% translate 'No, llévame de vuelta' %}</a>
                 </div>
             </form>
         {% endif %}
