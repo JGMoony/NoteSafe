@@ -1,11 +1,138 @@
 {% extends "base.html" %}
 {% load i18n admin_urls static %}
 
+{% block extrastyle %}
+<style>
+    #content-main { max-width: 900px; 
+      margin: 20px auto; 
+      padding: 0 20px; 
+    }
+
+    .module { 
+      background-color: #1e1e1e; 
+      padding: 30px; 
+      border-radius: 8px; 
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); 
+    }
+
+    .module h1 { 
+      color: #fff; 
+      border-bottom: 1px solid #444; 
+      padding-bottom: 10px; 
+      margin-bottom: 20px; 
+      font-size: 1.8em; 
+    }
+
+    .breadcrumbs { 
+      color: #aaa; 
+      margin-bottom: 20px; 
+      font-size: 0.9em; 
+    }
+
+    .breadcrumbs a { 
+      color: #6c78e4; 
+      text-decoration: none; 
+    }
+
+    fieldset { 
+      border: 1px solid #333; 
+      padding: 20px; 
+      margin-bottom: 25px; 
+      border-radius: 6px; 
+      background-color: #2a2a2a; 
+    }
+
+    fieldset h2 { 
+      color: #fff; 
+      border-bottom: 1px solid #444;
+      padding-bottom: 8px; 
+      margin: -10px 0 15px 0; 
+      font-size: 1.4em; 
+    }
+
+    fieldset .description { 
+      color: #b0b0b0; 
+      margin-bottom: 15px; 
+      font-style: italic; 
+    }
+    
+    .form-row { 
+      margin-bottom: 15px; 
+      padding: 10px 0; 
+      border-bottom: 1px dashed #333; 
+      display: flex; 
+      flex-wrap: wrap; 
+    }
+
+    .form-row:last-child { 
+      border-bottom: none; 
+    }
+
+    .form-row label { 
+        color: #fff; 
+        font-weight: 600; 
+        display: block; 
+        margin-bottom: 5px;
+        width: 180px;
+        padding-top: 8px;
+    }
+    
+    input[type="text"], input[type="email"], input[type="password"], select, textarea {
+        background-color: #1e1e1e;
+        border: 1px solid #444;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 4px;
+        width: calc(100% - 190px);
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus, textarea:focus { 
+        border-color: #6c78e4; 
+        outline: none;
+    }
+
+    .help, .helptext { color: #888; font-size: 0.9em; margin-top: 5px; }
+    .errornote, ul.errorlist { 
+        background-color: #551c1c; 
+        color: #ffcccc; 
+        border: 1px solid #dc3545; 
+        padding: 10px; 
+        border-radius: 4px; 
+        margin-bottom: 15px;
+    }
+
+    .submit-row { 
+        background-color: #2a2a2a; 
+        padding: 15px 20px; 
+        border-radius: 0 0 8px 8px; 
+        margin: 30px -30px -30px -30px;
+        text-align: right;
+        border-top: 1px solid #333;
+    }
+    .submit-row input[type="submit"] {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.2s;
+    }
+    .submit-row .default { 
+        background-color: #28a745; 
+        color: white; 
+    }
+    .submit-row .default:hover { 
+        background-color: #218838; 
+    }
+</style>
+{% endblock extrastyle %}
+
 {% block content %}
 <div id="content-main">
     <div class="module" id="add-user-form">
 
-        <h1>{% translate "Añadir usuario" %}</h1>
+        <h1><i class="fas fa-user-plus" style="margin-right: 10px; color: #28a745;"></i>{% translate "Añadir usuario" %}</h1>
 
         {% url opts|admin_urlname:'changelist' as changelist_url %}
         <p class="breadcrumbs">
@@ -18,7 +145,6 @@
             {% csrf_token %}
 
             <div>
-
                 {% if errors %}
                     <p class="errornote">
                         {% if errors|length == 1 %}{% translate "Please correct the error below." %}{% else %}{% translate "Please correct the errors below." %}{% endif %}
@@ -35,10 +161,10 @@
                         {% for line in fieldset %}
                           <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
                             {% for field in line %}
-                              <div{% if not line.show_label %} class="fieldBox"{% endif %}>
+                              <div{% if not line.show_label %} class="fieldBox"{% endif %} style="display: flex; align-items: flex-start; width: 100%;">
                                 {{ field.field.label_tag }}
                                   {% if field.is_readonly %}
-                                    <p>{{ field.contents }}</p>
+                                    <p style="color: #ccc; padding-top: 8px;">{{ field.contents }}</p>
                                   {% else %}
                                     {{ field.field }}
                                   {% endif %}
@@ -48,9 +174,8 @@
                                   {% endif %}
 
                                   {% if field.field.help_text %}
-                                    <p class="help">{{ field.field.help_text|safe }}</p>
+                                    <p class="help" style="width: 100%; margin-left: 190px;">{{ field.field.help_text|safe }}</p>
                                     {% endif %}
-
                                 </div>
                             {% endfor %}
                           </div>
